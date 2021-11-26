@@ -17,7 +17,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 const useStyles = makeStyles({
   indicator: {
-    top: "0px",
+    top: "8px",
     
   },
 });
@@ -34,8 +34,9 @@ const StyledTabs = styled((props) => (
     backgroundColor: "transparent",
   },
   "& .MuiTabs-indicatorSpan": {
-    maxWidth: 40,
+    maxWidth: 20,
     width: "100%",
+    height:3,
     backgroundColor: "#26CE8D",
   },
 });
@@ -44,8 +45,9 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
   ({ theme }) => ({
     textTransform: "none",
     fontWeight: theme.typography.fontWeightRegular,
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(13),
     marginRight: theme.spacing(1),
+ 
     color: "white",
     "&.Mui-selected": {
       color: "#26CE8D",
@@ -86,7 +88,7 @@ export default function Header() {
             </StyledTabs>
           </Box>
           <Box sx={{ display: "flex", flexGrow: 0.5 }} />
-          <AccountCircleOutlinedIcon />
+          <AccountCircleOutlinedIcon sx={{fontSize:28}}/>
           <Paper
             component="form"
             sx={{
