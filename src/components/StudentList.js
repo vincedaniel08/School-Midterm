@@ -28,7 +28,7 @@ const Img = styled("img")({
   maxHeight: "100%",
 });
 
-export default function StudentEvaluation() {
+export default function StudentList() {
   const [sort, setSort] = React.useState(10);
   const [filter, setFilter] = React.useState(10);
   const [value] = React.useState(2);

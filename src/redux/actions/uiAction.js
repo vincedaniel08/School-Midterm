@@ -44,3 +44,13 @@ export const getLang = () => async (dispatch) =>
     }
 };
 
+
+export const toggleTab = (tab) => async (dispatch) =>
+{
+    try{
+      localStorage.setItem("tab",tab);
+        dispatch({type: actionTypes.SET_TAB, payload : tab});
+    }catch(err){
+      console.log(err);
+    }
+}

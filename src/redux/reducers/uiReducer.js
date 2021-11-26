@@ -3,6 +3,7 @@ import * as actionTypes from "../types";
 const initialState = {
     isDarkMode: false,
     lang: "en",
+    tab:1,
     //content: "",
     
 };
@@ -21,6 +22,11 @@ function uiReducer (state = initialState, action)
                 ...state,
                 lang: action.payload,
             };
+            case actionTypes.SET_TAB:
+                return {
+                    ...state,
+                    tab: action.payload,
+                };
             
                 default:
                 return{

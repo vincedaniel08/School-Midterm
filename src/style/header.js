@@ -11,7 +11,8 @@ const style = {
     },
       logoTypography:{
         fontWeight:400,
-        fontSize: 18,
+        fontSize: 20,
+        mx:2.5
       
    
       },
