@@ -28,6 +28,16 @@ const style = {
   boxFilterTypog: {
     fontSize: 14,
   },
+  boxCategory:{
+    display: "flex",
+    flexDirection:"row",
+    alignItems: "right",
+    justifyContent: "right",
+    ml:{
+      xs:0,
+      md:10
+    }
+  },
   select: {
     height: 30,
     p: 0.5,
@@ -43,8 +53,23 @@ const style = {
     maxWidth: 500,
     flexGrow: 2,
   },
+  listText:{
+    fontSize: {
+      xs:13,
+      sm:14,
+      md:15
+  },
+
+  fontWeight: "medium",
+  letterSpacing: 0,
+  mr:5
+  },
   rating: {
-    fontSize: 20,
+    fontSize: {
+      xs:10,
+      sm:15,
+      md:20
+  },
     mr: 2,
   },
 };
