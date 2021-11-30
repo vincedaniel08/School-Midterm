@@ -54,3 +54,13 @@ export const toggleTab = (tab) => async (dispatch) =>
       console.log(err);
     }
 }
+
+export const toggleProfile = (profile) => async (dispatch) =>
+{
+    try{
+      localStorage.setItem("profile",profile);
+        dispatch({type: actionTypes.SET_PROFILE, payload : profile});
+    }catch(err){
+      console.log(err);
+    }
+}

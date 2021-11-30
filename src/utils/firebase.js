@@ -8,12 +8,12 @@ import 'firebase/compat/firestore';
 //import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyASKvWryQX50g9Tf6VS9ZWCnbqVcLqS7rA",
-    authDomain: "capstone-ecommerce-f050a.firebaseapp.com",
-    projectId: "capstone-ecommerce-f050a",
-    storageBucket: "capstone-ecommerce-f050a.appspot.com",
-    messagingSenderId: "403165035859",
-    appId: "1:403165035859:web:ac0f338f6a388576b4f5a6"
+  apiKey: "AIzaSyCFHwhvdSWeh3UG-ur1lMBRi2A9irp3E1M",
+  authDomain: "midterm-4th-year.firebaseapp.com",
+  projectId: "midterm-4th-year",
+  storageBucket: "midterm-4th-year.appspot.com",
+  messagingSenderId: "747362732932",
+  appId: "1:747362732932:web:20ecc0842d2ff0582c6bd1"
   };
   const app = initializeApp(firebaseConfig);
 
@@ -22,3 +22,12 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
+/**
+apiKey: "AIzaSyBxFCFEF7XICubpyCvpnfCKGZKD81FJeuA",
+  authDomain: "midterm-4th-year-29426.firebaseapp.com",
+  projectId: "midterm-4th-year-29426",
+  storageBucket: "midterm-4th-year-29426.appspot.com",
+  messagingSenderId: "343266854129",
+  appId: "1:343266854129:web:6e7b7d3767d3f38d0a9550",
+  measurementId: "G-8LSER1GD13"
+*/

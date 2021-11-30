@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 
 
 import uiReducer from "./reducers/uiReducer";
+import userReducer from "./reducers/userReducer";
 
 
 const initialState = {};
@@ -10,6 +11,7 @@ const middleware = [thunk];
 const reducers = combineReducers({
     // add reducer here
     ui: uiReducer,
+    user: userReducer,
  
   
 
