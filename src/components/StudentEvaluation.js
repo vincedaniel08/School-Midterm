@@ -28,7 +28,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db } from "../utils/firebase";
-
+import {Helmet} from "react-helmet";
 import { styled } from "@mui/material/styles";
 import style from "../style/studentEvaluation";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
@@ -470,6 +470,14 @@ export default function StudentEvaluation() {
 
   return (
     <Box sx={style.root}>
+      <Helmet>
+                <title>{studentDetail.Name}</title>
+                <meta
+                  name="Student Evaluation"
+                  content="Overall Rating, Teamwork, Creativity, Adaptability, Leadership, Persuasion,"
+                />
+                
+            </Helmet>
       <Header />
       <Box sx={{ width: "100%" }}>
         <Grid
