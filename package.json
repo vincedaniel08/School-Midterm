@@ -51,9 +51,9 @@
     ]
   },
   "reactSnap": {
-    "puppeteerArgs":[
-        "--no-sandbox",
-        "--disable-setuid-sandbox"
+    "puppeteerArgs": [
+      "--no-sandbox", 
+      "--disable-setuid-sandbox"
     ]
   }
 }
