@@ -20,7 +20,6 @@ import {
 } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
-import exampleimage from "../assets/image/loginBg.jpg";
 import style from "../style/studentList";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -71,11 +70,13 @@ export default function StudentList() {
           sx={{ my: 1 }}
         >
           {state.students.map((student) => (
-            <Paper sx={style.paper}>
+            <Paper sx={style.paper}  onClick={() => handleProductDetail(student.Name)}>
               <Grid container spacing={2}>
                 <Grid item>
                   <ButtonBase sx={{ width: 50, height: 50 }}>
-                    <Avatar></Avatar>
+                    <Avatar>
+                  <Img alt="complex" src={student.Image} />
+                  </Avatar>
                   </ButtonBase>
                 </Grid>
                 <Grid item xs={5} sm container>
@@ -237,13 +238,13 @@ export default function StudentList() {
 
           {state.students.map((student, index) => (
             <Paper sx={{ my: 1 }}>
-              <ListItemButton onClick={() => handleProductDetail(student.id)}>
+              <ListItemButton onClick={() => handleProductDetail(student.Name)}>
                 <ListItemIcon>
                   <Typography sx={{ fontSize: 10 }}>{index + 1}</Typography>
                 </ListItemIcon>
 
                 <ListItemIcon sx={{ height: 30 }}>
-                  <Img alt="complex" src={exampleimage} />
+                  <Img alt="complex" src={student.Image} />
                 </ListItemIcon>
 
                 <ListItemText

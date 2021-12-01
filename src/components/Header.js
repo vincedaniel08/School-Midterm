@@ -15,6 +15,8 @@ import {
 
 import { useDispatch } from 'react-redux'
 import { toggleTab } from '../redux/actions/uiAction'
+import { toggleProfile } from '../redux/actions/userAction'
+import { useSelector } from "react-redux";
 
 import googleIcon from "../assets/image/google.png";
 import icon from "../assets/image/Gridicon.png";
@@ -72,6 +74,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 );
 
 export default function Header() {
+  const state = useSelector((state) => state.user);
   const history = useHistory();
   const user = getAuth();
   const provider = new GoogleAuthProvider();
@@ -93,7 +96,7 @@ export default function Header() {
   const handleClickEvaluation = () => {
  
 
-    history.push("/studentevaluation")
+    history.push("/studentevaluation?student=Bryce%20Ganotice")
   
   };
 
@@ -105,15 +108,17 @@ export default function Header() {
 
 
   const handleClick = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
+   
+    dispatch(toggleProfile(true));
   
   };
 
-  const open = Boolean(anchorEl);
+  const open = state.profile;
   const id = open ? 'simple-popper' : undefined;
 
   const handleClose = () => {
     setAnchorEl(null);
+    dispatch(toggleProfile(null));
   };
 
   function buttonGoogle() {
@@ -162,6 +167,7 @@ export default function Header() {
       .then(() => {
         // Sign-out successful.
         alert("Sign Off Successfully");
+        history.push("/")
       })
       .catch((error) => {
         // An error happened.

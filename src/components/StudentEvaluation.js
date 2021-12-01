@@ -15,18 +15,38 @@ import {
   Avatar,
   IconButton,
 } from "@mui/material";
-import { doc, updateDoc,increment } from "firebase/firestore";
-import {db} from "../utils/firebase"
+
+import {
+  doc,
+  updateDoc,
+  increment,
+  addDoc,
+  collection,
+  query,
+  where,
+  onSnapshot,
+  orderBy,
+} from "firebase/firestore";
+import { db } from "../utils/firebase";
 
 import { styled } from "@mui/material/styles";
-import exampleimage from "../assets/image/loginBg.jpg";
 import style from "../style/studentEvaluation";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ReportGmailerrorredOutlinedIcon from "@mui/icons-material/ReportGmailerrorredOutlined";
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import Header from "./Header";
+import { auth } from "../utils/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import { useLocation } from "react-router";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { toggleProfile } from "../redux/actions/userAction";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import localizeFormat from "dayjs/plugin/localizedFormat";
+import { useHistory } from "react-router-dom";
+dayjs.extend(localizeFormat);
+dayjs.extend(relativeTime);
 const Img = styled("img")({
   margin: "auto",
   display: "block",
@@ -35,8 +55,10 @@ const Img = styled("img")({
 });
 
 export default function StudentEvaluation() {
+  const history = useHistory();
   const state = useSelector((state) => state.user);
   //const [value] = useState(4);
+  const dispatch = useDispatch();
   const [overAll, setOverAll] = useState(0);
   const [teamWork, setTeamWork] = useState(5);
   const [creativity, setCreativity] = useState(5);
@@ -48,6 +70,8 @@ export default function StudentEvaluation() {
   const [sort, setSort] = React.useState(10);
   const [filter, setFilter] = React.useState(10);
   const [comment, setComment] = React.useState("");
+  const [subComment, setSubComment] = React.useState("");
+  const [subCommentDetail, setSubCommentDetail] = React.useState([]);
   const handleChangeSort = (event) => {
     setSort(event.target.value);
   };
@@ -56,12 +80,20 @@ export default function StudentEvaluation() {
   };
 
   const handleChangeComment = () => {
-    setOpenComment(true);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setOpenComment(true);
+      } else {
+        dispatch(toggleProfile(true));
+      }
+    });
   };
 
   const [studentDetail, setStudentDetail] = useState([
     { Name: "Loading...", id: "initial" },
   ]);
+
+  const [commentDetail, setCommentDetail] = useState([]);
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -71,45 +103,278 @@ export default function StudentEvaluation() {
   //console.log(studentId);
 
   useEffect(() => {
-    const getData = async () => {
+    const getData = () => {
       if (studentId === null) {
-       // console.log("no data");
+        console.log("no data");
         setStudentDetail(state.students[0]);
-        //console.log(studentDetail);
+
       } else {
         const testStudentId = state.students.find(
-          (student) => student.id === studentId
+          (student) => student.Name === studentId
         );
-       // console.log(testStudentId);
         setStudentDetail(testStudentId);
+        console.log("bit")
+
+        const collectionRef = collection(db, "comments");
+        const q = query(collectionRef, where("StudentName", "==", studentId));
+       onSnapshot(q, (snapshot) =>
+         setCommentDetail(
+           snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        )
+        );
+
+        const collectionRef1 = collection(db, "subComments");
+       const q1 = query(collectionRef1, orderBy("Created_at"));
+
+        onSnapshot(q1, (snapshot) =>
+          setSubCommentDetail(
+           snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+         )
+        );
+       
+        // console.log(testStudentId);
+        // setCommentDetail(state.comments);
       }
     };
 
     return getData();
-  });
-const handleComment = (event) =>{
-  setComment(event.target.value);
-  
-}
+  },[studentId,state.students]);
 
-const submitRating = async () => {
-  console.log("submit")
-  console.log("overall rating:",overAll)
+  const handleComment = (event) => {
+    setComment(event.target.value);
+  };
+  const handleSubComment = (event) => {
+    setSubComment(event.target.value);
+  };
 
-
-    const studentRef = doc(db, "students", studentDetail.id);
-   // const increment = studentRef.FieldValue.increment(1);
-    await updateDoc(studentRef, {
-      OverallRatingFive: increment(1)
+  const submitSubComment = (email) => {
+    onAuthStateChanged(auth, (user) => {
+      var UserDocRef = collection(db, "subComments");
+      addDoc(UserDocRef, {
+        Comment: subComment,
+        UserPostEmail: email,
+        UserCommentEmail: user.email,
+        Created_at: new Date().getTime(),
+      });
     });
-} 
+    setOpenComment(false);
+  };
+
+  const submitRating = async () => {
+    console.log("submit");
+    console.log("overall rating:", overAll);
+
+    onAuthStateChanged(auth, (user) => {
+      const studentRef = doc(db, "students", studentDetail.id);
+      var UserDocRef = collection(db, "comments");
+      // const increment = studentRef.FieldValue.increment(1);
+
+      if (overAll === 1) {
+        updateDoc(studentRef, {
+          OverallRatingOne: increment(1),
+        });
+      }
+      if (overAll === 2) {
+        updateDoc(studentRef, {
+          OverallRatingTwo: increment(1),
+        });
+      }
+      if (overAll === 3) {
+        updateDoc(studentRef, {
+          OverallRatingThree: increment(1),
+        });
+      }
+      if (overAll === 4) {
+        updateDoc(studentRef, {
+          OverallRatingFour: increment(1),
+        });
+      }
+      if (overAll === 5) {
+        updateDoc(studentRef, {
+          OverallRatingFive: increment(1),
+        });
+      }
+      //teamwork
+      if (teamWork === 1) {
+        updateDoc(studentRef, {
+          TeamworkRatingOne: increment(1),
+        });
+      }
+      if (teamWork === 2) {
+        updateDoc(studentRef, {
+          TeamworkRatingTwo: increment(1),
+        });
+      }
+      if (teamWork === 3) {
+        updateDoc(studentRef, {
+          TeamworkRatingThree: increment(1),
+        });
+      }
+      if (teamWork === 4) {
+        updateDoc(studentRef, {
+          TeamworkRatingFour: increment(1),
+        });
+      }
+      if (teamWork === 5) {
+        updateDoc(studentRef, {
+          TeamworkRatingFive: increment(1),
+        });
+      }
+
+      //creativity
+      if (creativity === 1) {
+        updateDoc(studentRef, {
+          CreativityRatingOne: increment(1),
+        });
+      }
+      if (creativity === 2) {
+        updateDoc(studentRef, {
+          CreativityRatingTwo: increment(1),
+        });
+      }
+      if (creativity === 3) {
+        updateDoc(studentRef, {
+          CreativityRatingThree: increment(1),
+        });
+      }
+      if (creativity === 4) {
+        updateDoc(studentRef, {
+          CreativityRatingFour: increment(1),
+        });
+      }
+      if (creativity === 5) {
+        updateDoc(studentRef, {
+          CreativityRatingFive: increment(1),
+        });
+      }
+
+      //adaptability
+      if (adaptability === 1) {
+        updateDoc(studentRef, {
+          AdaptabilityRatingOne: increment(1),
+        });
+      }
+      if (adaptability === 2) {
+        updateDoc(studentRef, {
+          AdaptabilityRatingTwo: increment(1),
+        });
+      }
+      if (adaptability === 3) {
+        updateDoc(studentRef, {
+          AdaptabilityRatingThree: increment(1),
+        });
+      }
+      if (adaptability === 4) {
+        updateDoc(studentRef, {
+          AdaptabilityRatingFour: increment(1),
+        });
+      }
+      if (adaptability === 5) {
+        updateDoc(studentRef, {
+          AdaptabilityRatingFive: increment(1),
+        });
+      }
+
+      //leadership
+      if (leadership === 1) {
+        updateDoc(studentRef, {
+          LeadershipRatingOne: increment(1),
+        });
+      }
+      if (leadership === 2) {
+        updateDoc(studentRef, {
+          LeadershipRatingTwo: increment(1),
+        });
+      }
+      if (leadership === 3) {
+        updateDoc(studentRef, {
+          LeadershipRatingThree: increment(1),
+        });
+      }
+      if (leadership === 4) {
+        updateDoc(studentRef, {
+          LeadershipRatingFour: increment(1),
+        });
+      }
+      if (leadership === 5) {
+        updateDoc(studentRef, {
+          LeadershipRatingFive: increment(1),
+        });
+      }
+
+      //Persuasion
+      if (persuasion === 1) {
+        updateDoc(studentRef, {
+          PersuasionRatingOne: increment(1),
+        });
+      }
+      if (persuasion === 2) {
+        updateDoc(studentRef, {
+          PersuasionRatingTwo: increment(1),
+        });
+      }
+      if (persuasion === 3) {
+        updateDoc(studentRef, {
+          PersuasionRatingThree: increment(1),
+        });
+      }
+      if (persuasion === 4) {
+        updateDoc(studentRef, {
+          PersuasionRatingFour: increment(1),
+        });
+      }
+      if (persuasion === 5) {
+        updateDoc(studentRef, {
+          PersuasionRatingFive: increment(1),
+        });
+      }
+
+      addDoc(UserDocRef, {
+        UserRating: overAll,
+        Comment: comment,
+        UserCommentEmail: user.email,
+        Created_at: new Date().getTime(),
+        StudentName: studentDetail.Name,
+      });
+      history.push("/");
+      alert("Added Rate Successfully");
+    });
+    setOpen(false);
+    setOverAll(null);
+    setTeamWork(null);
+    setCreativity(null);
+    setAdaptability(null);
+    setLeadership(null);
+    setPersuasion(null);
+  };
+
+  const handleAllRating = (event, newValue) => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("Overall: " + newValue);
+        setOverAll(newValue);
+        setOpen(true);
+
+        if (newValue === null) {
+          setOpen(false);
+          setTeamWork(null);
+          setCreativity(null);
+          setAdaptability(null);
+          setLeadership(null);
+          setPersuasion(null);
+        } else {
+        }
+      } else {
+        dispatch(toggleProfile(true));
+      }
+    });
+  };
 
   //rating formula
 
- 
   const totalOverallRating =
     studentDetail.OverallRatingFive +
-    studentDetail.OverallRatingThree +
+    studentDetail.OverallRatingFour +
     studentDetail.OverallRatingThree +
     studentDetail.OverallRatingTwo +
     studentDetail.OverallRatingOne;
@@ -125,7 +390,7 @@ const submitRating = async () => {
   //teamwork
   const totalTeamWorkRating =
     studentDetail.TeamworkRatingFive +
-    studentDetail.TeamworkRatingThree +
+    studentDetail.TeamworkRatingFour +
     studentDetail.TeamworkRatingThree +
     studentDetail.TeamworkRatingTwo +
     studentDetail.TeamworkRatingOne;
@@ -141,7 +406,7 @@ const submitRating = async () => {
   //creativity
   const totalCreativityRating =
     studentDetail.CreativityRatingFive +
-    studentDetail.CreativityRatingThree +
+    studentDetail.CreativityRatingFour +
     studentDetail.CreativityRatingThree +
     studentDetail.CreativityRatingTwo +
     studentDetail.CreativityRatingOne;
@@ -154,46 +419,46 @@ const submitRating = async () => {
       1 * studentDetail.CreativityRatingOne) /
     totalCreativityRating;
 
-    //adaptability
+  //adaptability
   const totalAdaptabilityRating =
-  studentDetail.AdaptabilityRatingFive +
-  studentDetail.AdaptabilityRatingThree +
-  studentDetail.AdaptabilityRatingThree +
-  studentDetail.AdaptabilityRatingTwo +
-  studentDetail.AdaptabilityRatingOne;
+    studentDetail.AdaptabilityRatingFive +
+    studentDetail.AdaptabilityRatingFour +
+    studentDetail.AdaptabilityRatingThree +
+    studentDetail.AdaptabilityRatingTwo +
+    studentDetail.AdaptabilityRatingOne;
 
-const adaptabilityRatingAverage =
-  (5 * studentDetail.AdaptabilityRatingFive +
-    4 * studentDetail.AdaptabilityRatingFour +
-    3 * studentDetail.AdaptabilityRatingThree +
-    2 * studentDetail.AdaptabilityRatingTwo +
-    1 * studentDetail.AdaptabilityRatingOne) /
-  totalAdaptabilityRating;
+  const adaptabilityRatingAverage =
+    (5 * studentDetail.AdaptabilityRatingFive +
+      4 * studentDetail.AdaptabilityRatingFour +
+      3 * studentDetail.AdaptabilityRatingThree +
+      2 * studentDetail.AdaptabilityRatingTwo +
+      1 * studentDetail.AdaptabilityRatingOne) /
+    totalAdaptabilityRating;
 
-   //leadership
-   const totalLeadershipRating =
-   studentDetail.LeadershipRatingFive +
-   studentDetail.LeadershipRatingThree +
-   studentDetail.LeadershipRatingThree +
-   studentDetail.LeadershipRatingTwo +
-   studentDetail.LeadershipRatingOne;
- 
- const leadershipRatingAverage =
-   (5 * studentDetail.LeadershipRatingFive +
-     4 * studentDetail.LeadershipRatingFour +
-     3 * studentDetail.LeadershipRatingThree +
-     2 * studentDetail.LeadershipRatingTwo +
-     1 * studentDetail.LeadershipRatingOne) /
-   totalLeadershipRating;
+  //leadership
+  const totalLeadershipRating =
+    studentDetail.LeadershipRatingFive +
+    studentDetail.LeadershipRatingFour +
+    studentDetail.LeadershipRatingThree +
+    studentDetail.LeadershipRatingTwo +
+    studentDetail.LeadershipRatingOne;
 
-    //persuasion
-    const totalPersuasionRating =
+  const leadershipRatingAverage =
+    (5 * studentDetail.LeadershipRatingFive +
+      4 * studentDetail.LeadershipRatingFour +
+      3 * studentDetail.LeadershipRatingThree +
+      2 * studentDetail.LeadershipRatingTwo +
+      1 * studentDetail.LeadershipRatingOne) /
+    totalLeadershipRating;
+
+  //persuasion
+  const totalPersuasionRating =
     studentDetail.PersuasionRatingFive +
-    studentDetail.PersuasionRatingThree +
+    studentDetail.PersuasionRatingFour +
     studentDetail.PersuasionRatingThree +
     studentDetail.PersuasionRatingTwo +
     studentDetail.PersuasionRatingOne;
-  
+
   const persuasionRatingAverage =
     (5 * studentDetail.PersuasionRatingFive +
       4 * studentDetail.PersuasionRatingFour +
@@ -201,8 +466,7 @@ const adaptabilityRatingAverage =
       2 * studentDetail.PersuasionRatingTwo +
       1 * studentDetail.PersuasionRatingOne) /
     totalPersuasionRating;
-// end rating
-
+  // end rating
 
   return (
     <Box sx={style.root}>
@@ -231,11 +495,12 @@ const adaptabilityRatingAverage =
                 >
                   <ButtonBase sx={{ width: 80, height: 80 }}>
                     <Img
-                      alt="complex"
-                      src={exampleimage}
+                      alt="profile"
+                      src={studentDetail.Image}
                       sx={{ borderRadius: 1 }}
                     />
                   </ButtonBase>
+
                   <Rating
                     value={overallRatingAverage.toFixed(1)}
                     precision={0.5}
@@ -397,40 +662,48 @@ const adaptabilityRatingAverage =
                           {teamworkRatingAverage.toFixed(1)}
                         </Typography>
                       </Box>
-                      <Box  sx={
+                      <Box
+                        sx={
                           creativityRatingAverage > 3
                             ? style.boxRightScoreGreen
                             : style.boxRightScoreRed
-                        }>
+                        }
+                      >
                         <Typography color="textPrimary" variant="caption">
-                        {creativityRatingAverage.toFixed(1)}
+                          {creativityRatingAverage.toFixed(1)}
                         </Typography>
                       </Box>
-                      <Box sx={
-                         adaptabilityRatingAverage > 3
+                      <Box
+                        sx={
+                          adaptabilityRatingAverage > 3
                             ? style.boxRightScoreGreen
                             : style.boxRightScoreRed
-                        }>
+                        }
+                      >
                         <Typography color="textPrimary" variant="caption">
-                         {adaptabilityRatingAverage.toFixed(1)}
+                          {adaptabilityRatingAverage.toFixed(1)}
                         </Typography>
                       </Box>
-                      <Box sx={
-                         leadershipRatingAverage > 3
+                      <Box
+                        sx={
+                          leadershipRatingAverage > 3
                             ? style.boxRightScoreGreen
                             : style.boxRightScoreRed
-                        }>
+                        }
+                      >
                         <Typography color="textPrimary" variant="caption">
-                        {leadershipRatingAverage.toFixed(1)}
+                          {leadershipRatingAverage.toFixed(1)}
                         </Typography>
                       </Box>
-                      <Box sx={
-                         persuasionRatingAverage > 3
+                      <Box
+                        sx={
+                          persuasionRatingAverage > 3
                             ? style.boxRightScoreGreen
                             : style.boxRightScoreRed
-                        }>
+                        }
+                      >
                         <Typography color="textPrimary" variant="caption">
-                        {persuasionRatingAverage.toFixed(1)}
+                          {persuasionRatingAverage.toFixed(1)}
                         </Typography>
                       </Box>
                     </Grid>
@@ -446,19 +719,7 @@ const adaptabilityRatingAverage =
                 <Rating
                   sx={style.addRating}
                   value={overAll}
-                  onChange={(event, newValue) => {
-                    console.log("Overall: " + newValue);
-                    setOverAll(newValue);
-                    setOpen(true);
-                    if (newValue === null) {
-                      setOpen(false);
-                      setTeamWork(null);
-                      setCreativity(null);
-                      setAdaptability(null);
-                      setLeadership(null);
-                      setPersuasion(null);
-                    }
-                  }}
+                  onChange={handleAllRating}
                 />
 
                 {open ? (
@@ -559,7 +820,11 @@ const adaptabilityRatingAverage =
                         value={comment}
                       />
                     </FormControl>
-                    <Button variant="contained" sx={{ mt: 3 }} onClick={submitRating}>
+                    <Button
+                      variant="contained"
+                      sx={{ mt: 3 }}
+                      onClick={submitRating}
+                    >
                       Submit
                     </Button>
                   </Paper>
@@ -617,116 +882,150 @@ const adaptabilityRatingAverage =
               spacing={2}
               sx={{ my: 1 }}
             >
-              <Paper sx={style.paper}>
-                <Grid container spacing={2}>
-                  <Grid item>
-                    <ButtonBase sx={{ width: 50, height: 50 }}>
-                      <Avatar></Avatar>
-                    </ButtonBase>
-                  </Grid>
-                  <Grid item xs={10} sm container>
-                    <Grid item xs container direction="column" spacing={2}>
-                      <Grid item xs>
-                        <Typography variant="body2" component="div">
-                          vincedaniel08@yopmail.com
-                        </Typography>
-
-                        <Typography variant="caption" color="text.secondary">
-                          Posted 3 hours ago
-                        </Typography>
-                      </Grid>
+              <Box sx={style.paper}>
+                {commentDetail.map((comment, key) => (
+                  <Paper sx={style.paper} key={key}>
+                    <Grid container spacing={2}>
                       <Grid item>
-                        <Typography component="legend"></Typography>
-                        <Rating value={3} readOnly sx={style.rating} />
+                        <ButtonBase sx={{ width: 50, height: 50 }}>
+                          <Avatar></Avatar>
+                        </ButtonBase>
                       </Grid>
 
-                      <Grid item>
-                        <Typography variant="body2">
-                          {" "}
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua.{" "}
-                        </Typography>
-                      </Grid>
-
-                      <Grid item xs container direction="row" spacing={2}>
-                        <Grid item xs></Grid>
-                        <Grid item>
-                          <IconButton
-                            size="small"
-                            color="inherit"
-                            onClick={handleChangeComment}
-                          >
-                            <ChatBubbleOutlineOutlinedIcon />
-                            <Typography sx={style.commentIconTypogpraphy}>
-                              10 comments
+                      <Grid item xs={10} sm container>
+                        <Grid item xs container direction="column" spacing={2}>
+                          <Grid item xs>
+                            <Typography variant="body2" component="div">
+                              {comment.UserCommentEmail}
                             </Typography>
-                          </IconButton>
 
-                          <IconButton size="small" color="inherit">
-                            <ReportGmailerrorredOutlinedIcon />
-                            <Typography sx={style.commentIconTypogpraphy}>
-                              Report
+                            <Typography
+                              variant="caption"
+                              color="text.secondary"
+                            >
+                              Posted {dayjs(comment.Created_at).fromNow()}
                             </Typography>
-                          </IconButton>
+                          </Grid>
+                          <Grid item>
+                            <Rating
+                              value={comment.UserRating}
+                              readOnly
+                              sx={style.rating}
+                            />
+                          </Grid>
+
+                          <Grid item>
+                            <Typography variant="body2">
+                              {" "}
+                              {comment.Comment}{" "}
+                            </Typography>
+                          </Grid>
+
+                          <Grid item xs container direction="row" spacing={2}>
+                            <Grid item xs></Grid>
+                            <Grid item>
+                              <IconButton
+                                size="small"
+                                color="inherit"
+                                onClick={handleChangeComment}
+                              >
+                                <ChatBubbleOutlineOutlinedIcon />
+                                <Typography sx={style.commentIconTypogpraphy}>
+                                  {subCommentDetail.length} comments
+                                </Typography>
+                              </IconButton>
+
+                              <IconButton size="small" color="inherit">
+                                <ReportGmailerrorredOutlinedIcon />
+                                <Typography sx={style.commentIconTypogpraphy}>
+                                  Report
+                                </Typography>
+                              </IconButton>
+                            </Grid>
+                          </Grid>
+                          {/** Open Comment */}
+                          {openComment ? (
+                            <Paper sx={style.showComment}>
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "left",
+                                }}
+                              >
+                                <ReplyOutlinedIcon fontSize="medium" />
+                                <Typography variant="caption" sx={{ mx: 1 }}>
+                                  Add you comment
+                                </Typography>
+                              </Box>
+                              <Box sx={style.boxAllRating}>
+                                <FormControl fullWidth>
+                                  <OutlinedInput
+                                    placeholder="Please enter text"
+                                    rows={2}
+                                    multiline
+                                    onChange={handleSubComment}
+                                  />
+                                </FormControl>
+                                <Button
+                                  variant="contained"
+                                  sx={{ m: 2 }}
+                                  onClick={() =>
+                                    submitSubComment(comment.UserCommentEmail)
+                                  }
+                                >
+                                  Submit
+                                </Button>
+                              </Box>
+                            </Paper>
+                          ) : null}
+
+                          {subCommentDetail.map((subCommentss) => (
+                            <Paper
+                              sx={
+                                comment.UserCommentEmail ===
+                                subCommentss.UserPostEmail
+                                  ? style.showComment
+                                  : { display: "none" }
+                              }
+                            >
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "left",
+                                }}
+                              >
+                                <ReplyOutlinedIcon fontSize="medium" />
+                                <Typography variant="caption" sx={{ mx: 1 }}>
+                                  {comment.UserCommentEmail ===
+                                  subCommentss.UserPostEmail
+                                    ? subCommentss.UserCommentEmail
+                                    : ""}
+                                </Typography>
+                                <Typography variant="caption">
+                                  {comment.UserCommentEmail ===
+                                  subCommentss.UserPostEmail
+                                    ? dayjs(subCommentss.Created_at).fromNow()
+                                    : ""}
+                                </Typography>
+                              </Box>
+                              <Box sx={style.boxAllRating}>
+                                <Typography variant="caption">
+                                  {comment.UserCommentEmail ===
+                                  subCommentss.UserPostEmail
+                                    ? subCommentss.Comment
+                                    : ""}
+                                </Typography>
+                              </Box>
+                            </Paper>
+                          ))}
                         </Grid>
                       </Grid>
-                      {/** Open Comment */}
-                      {openComment ? (
-                        <Paper sx={style.showComment}>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "left",
-                            }}
-                          >
-                            <ReplyOutlinedIcon fontSize="medium" />
-                            <Typography variant="caption" sx={{ mx: 1 }}>
-                              Add you comment
-                            </Typography>
-                          </Box>
-                          <Box sx={style.boxAllRating}>
-                            <FormControl fullWidth>
-                              <OutlinedInput
-                                placeholder="Please enter text"
-                                rows={2}
-                                multiline
-                              />
-                            </FormControl>
-                            <Button variant="contained" sx={{ m: 2 }}>
-                              Submit
-                            </Button>
-                          </Box>
-                        </Paper>
-                      ) : null}
-
-                      <Paper sx={style.showComment}>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "left",
-                          }}
-                        >
-                          <ReplyOutlinedIcon fontSize="medium" />
-                          <Typography variant="caption" sx={{ mx: 1 }}>
-                            burnekekeke@gmail.com
-                          </Typography>
-                          <Typography variant="caption">3 hours ago</Typography>
-                        </Box>
-                        <Box sx={style.boxAllRating}>
-                          <Typography variant="caption">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua.
-                          </Typography>
-                        </Box>
-                      </Paper>
                     </Grid>
-                  </Grid>
-                </Grid>
-              </Paper>
+                  </Paper>
+                ))}
+              </Box>
             </Grid>
 
             <Pagination

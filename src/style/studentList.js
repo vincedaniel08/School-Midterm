@@ -64,6 +64,7 @@ const style = {
       md: 0,
       lg: 1
     },
+    cursor:"pointer"
 
 
   },

@@ -4,7 +4,9 @@ const initialState ={
     displayName:"",
     counter: null,
     error: null, 
-    students: []
+    students: [],
+    profile: "",
+    comments: [],
 }
 
  function userReducer(state=initialState, action)
@@ -17,7 +19,16 @@ const initialState ={
             students: action.payload,
         };
 
-       
+        case actionTypes.SET_PROFILE:
+            return {
+                ...state,
+                profile: action.payload,
+            };
+            case actionTypes.SET_COMMENT:
+            return {
+                ...state,
+                comments: action.payload,
+            };
         default:
             return{
                 ...state,
