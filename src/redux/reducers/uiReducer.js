@@ -4,7 +4,7 @@ const initialState = {
     isDarkMode: false,
     lang: "en",
     tab: 1,
-    
+    profile: false,
     //content: "",
 
 };
@@ -27,7 +27,11 @@ function uiReducer(state = initialState, action) {
                 ...state,
                 tab: action.payload,
             };
-        
+        case actionTypes.SET_PROFILE:
+            return {
+                ...state,
+                profile: action.payload,
+            };
 
         default:
             return {

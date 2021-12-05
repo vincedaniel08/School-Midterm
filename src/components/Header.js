@@ -10,7 +10,9 @@ import {
   Paper,
   Popover,
   Avatar,
-  Button
+  Button,
+  Menu,
+  MenuItem
 } from "@mui/material";
 
 import { useDispatch } from 'react-redux'
@@ -75,36 +77,29 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 
 export default function Header() {
   const state = useSelector((state) => state.user);
+  const stateui = useSelector((state) => state.ui);
   const history = useHistory();
-  const user = getAuth();
   const provider = new GoogleAuthProvider();
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [tabValue, setTabValue] = React.useState(1);
   const [userAuth, setUserAuth] = React.useState(false);
-
+  const [openMenu, setOpenMenu] = React.useState(false);
 
 
   const handleChange = (event, newValue) => {
-    setTabValue(newValue);
+  
     dispatch(toggleTab(newValue));
-    
+    if(newValue === 1){
+      history.push("/")
+    }else{
+      history.push("/studentevaluation?student=Vince%20Daniel%20De%20Leon")
+    }
+
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
  
-  const handleClickEvaluation = () => {
  
-
-    history.push("/studentevaluation?student=Bryce%20Ganotice")
-  
-  };
-
-  const handleClickList = () => {
- 
-    history.push("/")
-  
-  };
 
 
   const handleClick = (event) => {
@@ -174,26 +169,60 @@ export default function Header() {
       });
   };
 
+  const handleMenu = ()  =>{
+    setOpenMenu(true)
+  }
+  const handleCloseMenu = () => {
+    setOpenMenu(false);
+  };
+  const handleGotoList = () => {
+    setOpenMenu(false)
+    history.push("/")
+    dispatch(toggleTab(1));
+  };
+
+  const handleGotoEvaluation = () => {
+    setOpenMenu(false)
+    history.push("/studentevaluation?student=Vince%20Daniel%20De%20Leon")
+    dispatch(toggleTab(2));
+  };
+
+
   return (
     <Box>
       <AppBar position="static" sx={style.appbar}>
         <Toolbar>
           <Typography sx={style.logoTypography}>Student Review</Typography>
-          <img src={icon} alt="asd" />
+          <img src={icon} alt="asd" onClick={handleMenu} />
+          <Box sx={{mt:5}}>
+          <Menu  open={openMenu}
+          onClose={handleCloseMenu}
+           anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          
+          }}
+         
+       >
+             <MenuItem onClick={handleGotoList}>Student List </MenuItem>
+            <MenuItem onClick={handleGotoEvaluation}>Student Evaluation</MenuItem>
+         
+            </Menu>
+            </Box>
           <Box sx={{ display: "flex", flexGrow: 0.9 }} />
           <Box sx={style.tabs}>
 
             <StyledTabs
               centered
-              value={tabValue}
+              value={stateui.tab}
              onChange={handleChange}
               aria-label="styled tabs example"
               classes={{
                 indicator: classes.indicator,
               }}
             >
-              <StyledTab label="Student List" value={1} onClick={handleClickList}/>
-              <StyledTab label="Student Evaluation" value={2} onClick={handleClickEvaluation}/>
+              <StyledTab label="Student List" value={1} />
+              <StyledTab label="Student Evaluation" value={2}/>
               <StyledTab label="Blog" value={3} />
             </StyledTabs>
 
@@ -230,8 +259,8 @@ export default function Header() {
               </Box>
               :
               <Box sx={style.boxPopover}>
-              <Typography variant="h6" >Hi {user.email}</Typography>
-              <Typography sx={{ p: 2 }}>Sign in to review and rate the Student</Typography>
+              <Typography variant="h6" >Hi</Typography>
+              <Typography sx={{ p: 2 }}>Welcome, Student Review</Typography>
               <Button onClick={buttonLogout}>Logout</Button>
             </Box>
         

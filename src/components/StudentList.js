@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import {
   Grid,
@@ -20,9 +20,12 @@ import {
 } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
+import { toggleTab } from "../redux/actions/uiAction";
 import style from "../style/studentList";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 const Img = styled("img")({
   margin: "auto",
   display: "block",
@@ -32,9 +35,13 @@ const Img = styled("img")({
 
 export default function StudentList() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const state = useSelector((state) => state.user);
-  const [sort, setSort] = React.useState(10);
-  const [filter, setFilter] = React.useState(10);
+  const [sort, setSort] = useState(10);
+  const [filter, setFilter] = useState(10);
+
+  // const [overallRating, setOverallRating] = useState(0);
+
   const handleChangeSort = (event) => {
     setSort(event.target.value);
   };
@@ -44,10 +51,105 @@ export default function StudentList() {
 
   const handleProductDetail = (id) => {
     console.log(id);
-
+    dispatch(toggleTab(2));
     history.push(`/studentevaluation?student=${id}`);
   };
 
+  /**  const handleChangeRating = (student) => {
+    //rating formula
+
+    //teamwork
+
+    const totalTeamWorkRating =
+      student.teamworkFive +
+      student.teamworkFour +
+      student.teamworkThree +
+      student.teamworkTwo +
+      student.teamworkOne;
+
+    const teamworkRatingAverage =
+      (5 * student.teamworkFive +
+        4 * student.teamworkFour +
+        3 * student.teamworkThree +
+        2 * student.teamworkTwo +
+        1 * student.teamworkOne) /
+      totalTeamWorkRating;
+
+    //creativity
+    const totalCreativityRating =
+      student.creativityFive +
+      student.creativityFour +
+      student.creativityThree +
+      student.creativityTwo +
+      student.creativityOne;
+
+    const creativityRatingAverage =
+      (5 * student.creativityFive +
+        4 * student.creativityFour +
+        3 * student.creativityThree +
+        2 * student.creativityTwo +
+        1 * student.creativityOne) /
+      totalCreativityRating;
+
+    //adaptability
+    const totalAdaptabilityRating =
+      student.adaptabilityFive +
+      student.adaptabilityFour +
+      student.adaptabilityThree +
+      student.adaptabilityTwo +
+      student.adaptabilityOne;
+
+    const adaptabilityRatingAverage =
+      (5 * student.adaptabilityFive +
+        4 * student.adaptabilityFour +
+        3 * student.adaptabilityThree +
+        2 * student.adaptabilityTwo +
+        1 * student.adaptabilityOne) /
+      totalAdaptabilityRating;
+
+    //leadership
+    const totalLeadershipRating =
+      student.leadershipFive +
+      student.leadershipFour +
+      student.leadershipThree +
+      student.leadershipTwo +
+      student.leadershipOne;
+
+    const leadershipRatingAverage =
+      (5 * student.leadershipFive +
+        4 * student.leadershipFour +
+        3 * student.leadershipThree +
+        2 * student.leadershipTwo +
+        1 * student.leadershipOne) /
+      totalLeadershipRating;
+
+    //persuasion
+    const totalPersuasionRating =
+      student.persuasionFive +
+      student.persuasionFour +
+      student.persuasionThree +
+      student.persuasionTwo +
+      student.persuasionOne;
+
+    const persuasionRatingAverage =
+      (5 * student.persuasionFive +
+        4 * student.persuasionFour +
+        3 * student.persuasionThree +
+        2 * student.persuasionTwo +
+        1 * student.persuasionOne) /
+      totalPersuasionRating;
+
+    const totalOverallRating =
+      persuasionRatingAverage +
+      leadershipRatingAverage +
+      adaptabilityRatingAverage +
+      creativityRatingAverage +
+      teamworkRatingAverage;
+
+    const overallRatingAverage = totalOverallRating / 5;
+   // setOverallRating(overallRatingAverage);
+  //};
+*/
   return (
     <Box sx={style.box}>
       <Box sx={{ width: "100%" }}>
@@ -69,71 +171,71 @@ export default function StudentList() {
           spacing={2}
           sx={{ my: 1 }}
         >
-          {state.students.map((student) => (
-            <Paper sx={style.paper}  onClick={() => handleProductDetail(student.Name)}>
-              <Grid container spacing={2}>
-                <Grid item>
-                  <ButtonBase sx={{ width: 50, height: 50 }}>
-                    <Avatar>
-                  <Img alt="complex" src={student.Image} />
-                  </Avatar>
-                  </ButtonBase>
-                </Grid>
-                <Grid item xs={5} sm container>
-                  <Grid item xs container direction="column" spacing={2}>
+          {state.students &&
+            state.students.map((student, index) => {
+              return (
+                <Paper sx={style.paper} key={index + 1}>
+                  <Grid container spacing={2}>
                     <Grid item>
-                      <Typography
-                        variant="subtitle1"
-                        component="div"
-                        sx={style.cardname}
-                        noWrap
-                      >
-                        {student.Name}
-                      </Typography>
-
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={style.cardreview}
-                      >
-                        {student.OverallRatingFive +
-                          student.OverallRatingFour +
-                          student.OverallRatingThree +
-                          student.OverallRatingTwo +
-                          student.OverallRatingOne}{" "}
-                        reviews
-                      </Typography>
+                      <ButtonBase sx={{ width: 50, height: 50 }}>
+                        <Avatar>
+                          {" "}
+                          <Img alt="complex" src={student.image} />
+                        </Avatar>
+                      </ButtonBase>
                     </Grid>
-                    <Grid item>
-                      <Typography component="legend"></Typography>
-                      <Rating
-                        value={ (5 * student.OverallRatingFive +
-                          4 * student.OverallRatingFour +
-                          3 * student.OverallRatingThree +
-                          2 * student.OverallRatingTwo +
-                          1 * student.OverallRatingOne) /
-                        (
-                          student.OverallRatingFive +
-                          student.OverallRatingFour +
-                          student.OverallRatingThree +
-                          student.OverallRatingTwo +
-                          student.OverallRatingOne
-                        ).toFixed(1)}
-                        readOnly
-                        sx={style.rating}
-                        emptyIcon={
-                          <StarIcon
-                            style={{ opacity: 0.55 }}
-                            fontSize="inherit"
+                    <Grid item xs={5} sm container>
+                      <Grid item xs container direction="column" spacing={2}>
+                        <Grid item>
+                          <Typography
+                            variant="subtitle1"
+                            component="div"
+                            sx={style.cardname}
+                            noWrap
+                          >
+                            {student.studentName}
+                          </Typography>
+
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            sx={style.cardreview}
+                          >
+                            {student.studentReview} reviews
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography component="legend"></Typography>
+                          <Rating
+                            value={
+                              (5 * student.teamworkFive +
+                                4 * student.teamworkFour +
+                                3 * student.teamworkThree +
+                                2 * student.teamworkTwo +
+                                1 * student.teamworkOne) /
+                              (student.teamworkFive +
+                                student.teamworkFour +
+                                student.teamworkThree +
+                                student.teamworkTwo +
+                                student.teamworkOne)
+                            }
+                            readOnly
+                            precision={0.5}
+                            sx={style.rating}
+                            emptyIcon={
+                              <StarIcon
+                                style={{ opacity: 0.55 }}
+                                fontSize="inherit"
+                              />
+                            }
                           />
-                        }
-                      />
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
-              </Grid>
-            </Paper>
-          ))}
+                </Paper>
+              );
+            })}
         </Grid>
       </Box>
       <Box sx={style.boxFilter}>
@@ -144,12 +246,9 @@ export default function StudentList() {
           <Select
             value={sort}
             onChange={handleChangeSort}
-            displayEmpty
             size="small"
             sx={style.select}
-            inputProps={{ "aria-label": "Without label" }}
           >
-            <MenuItem value=""></MenuItem>
             <MenuItem value={10}>Most Recent</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
@@ -163,15 +262,11 @@ export default function StudentList() {
           <Select
             value={filter}
             onChange={handleChangeFilter}
-            displayEmpty
             size="small"
             sx={style.select}
-            inputProps={{ "aria-label": "Without label" }}
           >
-            <MenuItem value=""></MenuItem>
             <MenuItem value={10}>No Filter</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={20}>5 Stars</MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -236,60 +331,57 @@ export default function StudentList() {
             />
           </ListItem>
 
-          {state.students.map((student, index) => (
-            <Paper sx={{ my: 1 }}>
-              <ListItemButton onClick={() => handleProductDetail(student.Name)}>
-                <ListItemIcon>
-                  <Typography sx={{ fontSize: 10 }}>{index + 1}</Typography>
-                </ListItemIcon>
+          {state.students &&
+            state.students.map((student, index) => {
+              return (
+                <Paper sx={{ my: 1 }} key={index + 1}>
+                  <ListItemButton
+                    onClick={() => handleProductDetail(student.studentName)}
+                  >
+                    <ListItemIcon>
+                      <Typography sx={{ fontSize: 10 }}>{index + 1}</Typography>
+                    </ListItemIcon>
 
-                <ListItemIcon sx={{ height: 30 }}>
-                  <Img alt="complex" src={student.Image} />
-                </ListItemIcon>
+                    <ListItemIcon sx={{ height: 30 }}>
+                      <Img alt="complex" src={student.image} />
+                    </ListItemIcon>
 
-                <ListItemText
-                  primary={student.Name}
-                  sx={{ color: "gray" }}
-                  primaryTypographyProps={style.listText}
-                ></ListItemText>
-                <ListItemText
-                  primary={student.YearSection}
-                  sx={{ color: "gray" }}
-                  primaryTypographyProps={style.listText}
-                />
+                    <ListItemText
+                      primary={student.studentName}
+                      sx={{ color: "gray" }}
+                      primaryTypographyProps={style.listText}
+                    ></ListItemText>
+                    <ListItemText
+                      primary={student.studentSection}
+                      sx={{ color: "gray" }}
+                      primaryTypographyProps={style.listText}
+                    />
 
-                <ListItemText
-                  primary={
-                    student.OverallRatingFive +
-                    student.OverallRatingFour +
-                    student.OverallRatingThree +
-                    student.OverallRatingTwo +
-                    student.OverallRatingOne
-                  }
-                  color="textPrimary"
-                  primaryTypographyProps={style.listText}
-                />
-                <Rating
-                  value={
-                    (5 * student.OverallRatingFive +
-                      4 * student.OverallRatingFour +
-                      3 * student.OverallRatingThree +
-                      2 * student.OverallRatingTwo +
-                      1 * student.OverallRatingOne) /
-                    (
-                      student.OverallRatingFive +
-                      student.OverallRatingFour +
-                      student.OverallRatingThree +
-                      student.OverallRatingTwo +
-                      student.OverallRatingOne
-                    ).toFixed(1)
-                  }
-                  readOnly
-                  sx={style.rating}
-                />
-              </ListItemButton>
-            </Paper>
-          ))}
+                    <ListItemText
+                      primary={student.studentReview}
+                      color="textPrimary"
+                      primaryTypographyProps={style.listText}
+                    />
+                    <Rating
+                      value={
+                        (5 * student.teamworkFive +
+                          4 * student.teamworkFour +
+                          3 * student.teamworkThree +
+                          2 * student.teamworkTwo +
+                          1 * student.teamworkOne) /
+                        (student.teamworkFive +
+                          student.teamworkFour +
+                          student.teamworkThree +
+                          student.teamworkTwo +
+                          student.teamworkOne)
+                      }
+                      readOnly
+                      sx={style.rating}
+                    />
+                  </ListItemButton>
+                </Paper>
+              );
+            })}
         </List>
       </Box>
       <Pagination

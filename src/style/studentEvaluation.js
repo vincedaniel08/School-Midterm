@@ -1,9 +1,7 @@
-
-
 const style = {
   root: {
 
-    bgcolor:"white"
+    backgroundColor:"white"
   },
   box: {
     display: "block",
@@ -42,8 +40,7 @@ const style = {
     p: 2,
     margin: 'auto', 
     width: { xs: 400, md: 900 },
-   flexGrow: 1,
-   
+   flexGrow: 1
 
   },
   listText: {
@@ -115,15 +112,6 @@ const style = {
     },
     mr: 1,
   },
-  rightProfileDetails: {
-
-    fontSize: {
-      xs: 11,
-      sm: 13,
-      md: 15,
-    },
-    mr: 1,
-  },
   boxRightScoreRed: {
     display: "flex",
     alignItems: "center",
@@ -149,8 +137,29 @@ const style = {
     height: 20,
     width: 30
   },
+  rightProfileDetails: {
+
+    fontSize: {
+      xs: 11,
+      sm: 13,
+      md: 15,
+    },
+    mr: 1,
+  },
+  boxRightScore: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    backgroundColor: "red",
+    borderRadius: 1,
+    mb: .5,
+
+    height: 20,
+    width: 30
+  },
   boxAddRatingBox: {
- 
+
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
