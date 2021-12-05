@@ -15,6 +15,7 @@ import {
   Avatar,
   IconButton,
 } from "@mui/material";
+import {Helmet} from "react-helmet";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import localizeFormat from "dayjs/plugin/localizedFormat";
@@ -276,6 +277,14 @@ export default function StudentEvaluation() {
 
   return (
     <Box sx={style.root}>
+       <Helmet>
+                <title>{studentId}</title>
+                <meta
+                  name={studentId}
+                  content="Teamwork, Creativity, Adaptability, Leadership, Persuasion"
+                />
+                
+            </Helmet>
       <Header />
       <Box sx={{ width: "100%" }}>
         <Grid
