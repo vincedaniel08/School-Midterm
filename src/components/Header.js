@@ -29,7 +29,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 import { auth } from "../utils/firebase";
-import { getAuth, signInWithPopup, GoogleAuthProvider ,signOut} from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { useHistory } from "react-router-dom";
 
@@ -61,11 +61,11 @@ const StyledTabs = styled((props) => (
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
   ({ theme }) => ({
     textTransform: "none",
-    fontWeight: theme.typography.fontWeightRegular,
-    fontSize: theme.typography.pxToRem(13),
+    fontWeight: 500,
+    fontSize: '14px',
     marginRight: theme.spacing(1),
-
-    color: "white",
+    fontFamily: 'Roboto',
+    color: '#D1D4C9',
     "&.Mui-selected": {
       color: "#26CE8D",
     },
@@ -87,25 +87,25 @@ export default function Header() {
 
 
   const handleChange = (event, newValue) => {
-  
+
     dispatch(toggleTab(newValue));
-    if(newValue === 1){
+    if (newValue === 1) {
       history.push("/")
-    }else{
+    } else {
       history.push("/studentevaluation?student=Vince%20Daniel%20De%20Leon")
     }
 
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
- 
- 
+
+
 
 
   const handleClick = (event) => {
-   
+
     dispatch(toggleProfile(true));
-  
+
   };
 
   const open = state.profile;
@@ -144,8 +144,6 @@ export default function Header() {
 
 
       if (user) {
-      
-        
         setUserAuth(true);
       } else {
         setUserAuth(false);
@@ -169,7 +167,7 @@ export default function Header() {
       });
   };
 
-  const handleMenu = ()  =>{
+  const handleMenu = () => {
     setOpenMenu(true)
   }
   const handleCloseMenu = () => {
@@ -194,35 +192,35 @@ export default function Header() {
         <Toolbar>
           <Typography sx={style.logoTypography}>Student Review</Typography>
           <img src={icon} alt="asd" onClick={handleMenu} />
-          <Box sx={{mt:5}}>
-          <Menu  open={openMenu}
-          onClose={handleCloseMenu}
-           anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          
-          }}
-         
-       >
-             <MenuItem onClick={handleGotoList}>Student List </MenuItem>
-            <MenuItem onClick={handleGotoEvaluation}>Student Evaluation</MenuItem>
-         
+          <Box sx={{ mt: 5 }}>
+            <Menu open={openMenu}
+              onClose={handleCloseMenu}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+
+              }}
+
+            >
+              <MenuItem onClick={handleGotoList}>Student List </MenuItem>
+              <MenuItem onClick={handleGotoEvaluation}>Student Evaluation</MenuItem>
+
             </Menu>
-            </Box>
+          </Box>
           <Box sx={{ display: "flex", flexGrow: 0.9 }} />
           <Box sx={style.tabs}>
 
             <StyledTabs
               centered
               value={stateui.tab}
-             onChange={handleChange}
+              onChange={handleChange}
               aria-label="styled tabs example"
               classes={{
                 indicator: classes.indicator,
               }}
             >
               <StyledTab label="Student List" value={1} />
-              <StyledTab label="Student Evaluation" value={2}/>
+              <StyledTab label="Student Evaluation" value={2} />
               <StyledTab label="Blog" value={3} />
             </StyledTabs>
 
@@ -253,17 +251,17 @@ export default function Header() {
             }}
           >
             {!userAuth ? <Box sx={style.boxPopover}>
-                <Typography variant="h6" >Sign In</Typography>
-                <Typography sx={{ p: 2 }}>Sign in to review and rate the Student</Typography>
-                <IconButton onClick={buttonGoogle}><Avatar src={googleIcon} /></IconButton>
-              </Box>
+              <Typography variant="h6" >Sign In</Typography>
+              <Typography sx={{ p: 2 }}>Sign in to review and rate the Student</Typography>
+              <IconButton onClick={buttonGoogle}><Avatar src={googleIcon} /></IconButton>
+            </Box>
               :
               <Box sx={style.boxPopover}>
-              <Typography variant="h6" >Hi</Typography>
-              <Typography sx={{ p: 2 }}>Welcome, Student Review</Typography>
-              <Button onClick={buttonLogout}>Logout</Button>
-            </Box>
-        
+                <Typography variant="h6" >Hi</Typography>
+                <Typography sx={{ p: 2 }}>Welcome, Student Review</Typography>
+                <Button onClick={buttonLogout}>Logout</Button>
+              </Box>
+
 
             }
 
@@ -273,8 +271,8 @@ export default function Header() {
           <Paper
             component="form"
             sx={{
-              mr:2,
-              ml:2,
+              mr: 2,
+              ml: 2,
               display: "flex",
               alignItems: "center",
               width: "237px",

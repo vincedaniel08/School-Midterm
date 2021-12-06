@@ -1,13 +1,13 @@
 const style = {
+
   root: {
-    mt: -12,
+    fontFamily: 'Roboto',
     mx: {
       xs: 1,
       sm: 2,
       md: 3,
       lg: 9,
     },
-
   },
   box: {
     display: "block",
@@ -17,7 +17,10 @@ const style = {
       md: 15,
       lg: 25,
     },
+  },
 
+  boxcon: {
+    height: '1500px'
   },
 
   boxFilter: {
@@ -29,6 +32,7 @@ const style = {
   },
   boxFilterTypog: {
     fontSize: 14,
+    color: '#D1D4C9',
   },
   boxCategory: {
     display: "flex",
@@ -43,7 +47,9 @@ const style = {
   select: {
     height: 30,
     p: 0.5,
-    fontSize: 13,
+    fontSize: 12,
+    color: '#D1D4C9',
+    border: '1px solid #303336',
   },
   formcontrol: {
     minWidth: 100,
@@ -64,8 +70,10 @@ const style = {
       md: 0,
       lg: 1
     },
+  },
 
-
+  li: {
+    backgroundColor: '#131414',
   },
 
   paperTitle: {
@@ -98,6 +106,7 @@ const style = {
       md: 20
     },
     mr: 2,
+    color: '#26CE8D',
   },
 
   cardname: {
@@ -111,6 +120,9 @@ const style = {
     fontSize: '14px',
     color: '#62666D',
   },
+
+ 
+
 };
 
 export default style;

@@ -151,8 +151,9 @@ export default function StudentList() {
   //};
 */
   return (
+    <Box sx={style.boxcon}>
     <Box sx={style.box}>
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%" ,}}>
         <Typography
           color="textPrimary"
           sx={{ mt: 5, mx: 2, color: "#D1D4C9", fontSize: "18px" }}
@@ -224,7 +225,7 @@ export default function StudentList() {
                             sx={style.rating}
                             emptyIcon={
                               <StarIcon
-                                style={{ opacity: 0.55 }}
+                                style={{ opacity: 0.7, backgtoundColor: '#26CE8D',}}
                                 fontSize="inherit"
                               />
                             }
@@ -272,15 +273,15 @@ export default function StudentList() {
       </Box>
       <Box>
         <List
-          sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper" }}
+          sx={{ width: "100%", maxWidth: "100%", bgcolor: "#131414",  }}
           component="nav"
           aria-labelledby="nested-list-subheader"
         >
-          <ListItem>
-            <Box sx={{ flexGrow: { xs: 30, sm: 15, md: 10, lg: 3 } }} />
+          <ListItem >
+            <Box sx={{ flexGrow: { xs: 30, sm: 15, md: 10, lg: 3 },  }} />
             <ListItemText
               primary="Year & Section"
-              sx={{ textAlign: "center", ml: 10 }}
+              sx={{ textAlign: "center", ml: 10,  }}
               primaryTypographyProps={{
                 fontSize: {
                   xs: 10,
@@ -289,6 +290,7 @@ export default function StudentList() {
                 },
                 fontWeight: "medium",
                 letterSpacing: 0,
+                color: '#62666D',
               }}
             />
 
@@ -308,6 +310,7 @@ export default function StudentList() {
                 },
                 fontWeight: "medium",
                 letterSpacing: 0,
+                color: '#62666D',
               }}
             />
 
@@ -327,6 +330,7 @@ export default function StudentList() {
                 },
                 fontWeight: "medium",
                 letterSpacing: 0,
+                color: '#62666D',
               }}
             />
           </ListItem>
@@ -334,12 +338,12 @@ export default function StudentList() {
           {state.students &&
             state.students.map((student, index) => {
               return (
-                <Paper sx={{ my: 1 }} key={index + 1}>
+                <Paper sx={{ my: 1 , backgroundColor: '#1E1F20', border: '1px solid #303336'}} key={index + 1}>
                   <ListItemButton
                     onClick={() => handleProductDetail(student.studentName)}
                   >
                     <ListItemIcon>
-                      <Typography sx={{ fontSize: 10 }}>{index + 1}</Typography>
+                      <Typography sx={{ fontSize: 10, color: '#62666D' }}>{index + 1}</Typography>
                     </ListItemIcon>
 
                     <ListItemIcon sx={{ height: 30 }}>
@@ -348,18 +352,18 @@ export default function StudentList() {
 
                     <ListItemText
                       primary={student.studentName}
-                      sx={{ color: "gray" }}
+                      sx={{ color: '#D1D4C9', width: '80px' }}
                       primaryTypographyProps={style.listText}
                     ></ListItemText>
                     <ListItemText
                       primary={student.studentSection}
-                      sx={{ color: "gray" }}
+                      sx={{ color: "#62666D" }}
                       primaryTypographyProps={style.listText}
                     />
 
                     <ListItemText
                       primary={student.studentReview}
-                      color="textPrimary"
+                      sx={{ color: "#D1D4C9", fontSize: '14px' }}
                       primaryTypographyProps={style.listText}
                     />
                     <Rating
@@ -377,6 +381,7 @@ export default function StudentList() {
                       }
                       readOnly
                       sx={style.rating}
+                      emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                     />
                   </ListItemButton>
                 </Paper>
@@ -385,9 +390,12 @@ export default function StudentList() {
         </List>
       </Box>
       <Pagination
-        count={10}
-        sx={{ display: "flex", justifyContent: "center", my: 3 }}
+        count={3}
+        sx={{ display: "flex", justifyContent: "center", my: 3,  "& .MuiPaginationItem-root": {
+          color: "#D1D4C9"
+        } }}
       />
+    </Box>
     </Box>
   );
 }

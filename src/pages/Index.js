@@ -10,7 +10,7 @@ export default function Index() {
    
 
     return (
-        <Box sx={{backgroundColor:"white" }}>
+        <Box sx={{backgroundColor:"#131414" }}>
              <Helmet>
                 <title>Student List</title>
                 <meta

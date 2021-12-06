@@ -11,7 +11,10 @@ const style = {
         bottom: 0,
         width: "100%",
        // backgroundColor: (theme) => theme.palette.background.default,
-       backgroundColor: "gray"
+       backgroundColor: "#131414",
+       color: '#D1D4C9',
+       fontFamily: 'Roboto',
+       fontWeight: 300,
     },
   
     boxFilter: {

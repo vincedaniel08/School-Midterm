@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
+import StarIcon from '@mui/icons-material/Star';
 import {
   Pagination,
   Grid,
@@ -15,6 +16,7 @@ import {
   Avatar,
   IconButton,
 } from "@mui/material";
+import Footer from "./Footer";
 import {Helmet} from "react-helmet";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -286,7 +288,7 @@ export default function StudentEvaluation() {
                 
             </Helmet>
       <Header />
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%" ,backgroundColor: '#131414',}}>
         <Grid
           container
           direction="row"
@@ -294,7 +296,7 @@ export default function StudentEvaluation() {
           alignItems="center"
           rowSpacing={5}
           spacing={10}
-          sx={{ my: 1 }}
+          sx={{ my: 1,  }}
         >
           <Grid item>
             <Paper sx={style.paper}>
@@ -312,7 +314,7 @@ export default function StudentEvaluation() {
                     <Img
                       alt="complex"
                       src={state.findStudent.image}
-                      sx={{ borderRadius: 1 }}
+                      sx={{ borderRadius: 1, border: '1px solid #D1D4C9' }}
                     />
                   </ButtonBase>
                   <Rating
@@ -320,6 +322,7 @@ export default function StudentEvaluation() {
                     readOnly
                     sx={style.rating}
                     precision={0.5}
+                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                   />
                   <Box sx={style.boxLeftProfile}>
                     <Typography sx={style.leftProfileValue}>
@@ -346,29 +349,29 @@ export default function StudentEvaluation() {
                       mb: 2,
                     }}
                   >
-                    <Typography variant="h6">
+                    <Typography sx={style.studenttitlename}>
                       {state.findStudent.studentName}
                     </Typography>
-                    <Typography variant="inherit" sx={{ ml: 2 }}>
+                    <Typography variant="inherit" sx={{ ml: 2, color: '#D1D4C9' }}>
                       BSIT4B
                     </Typography>
                   </Box>
 
                   <Grid item xs container direction="column" spacing={10}>
-                    <Grid item xs>
-                      <Typography variant="body2" gutterBottom>
+                    <Grid item xs >
+                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}}gutterBottom>
                         Gender:
                       </Typography>
-                      <Typography variant="body2" gutterBottom>
+                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
                         Birthday:
                       </Typography>
-                      <Typography variant="body2" gutterBottom>
+                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
                         Address
                       </Typography>
-                      <Typography variant="body2" gutterBottom>
+                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
                         Nickname:
                       </Typography>
-                      <Typography variant="body2" gutterBottom>
+                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
                         Skills/Language:
                       </Typography>
                     </Grid>
@@ -387,39 +390,34 @@ export default function StudentEvaluation() {
                     }}
                   >
                     <Grid item xs>
-                      <Typography variant="h6"></Typography>
+                      <Typography></Typography>
                       <Typography
-                        variant="body2"
                         gutterBottom
-                        sx={{ fontSize: { xs: 15, md: 14 } }}
+                        sx={{ fontSize:'12px' ,fontWeight: 300, color: '#D1D4C9' }}
                       >
                         {state.findStudent.studentGender}
                       </Typography>
                       <Typography
-                        variant="body2"
                         gutterBottom
-                        sx={{ fontSize: { xs: 14, md: 14 } }}
+                        sx={{ fontSize:'12px' ,fontWeight: 300, color: '#D1D4C9' }}
                       >
                         {state.findStudent.studentBirthdate}
                       </Typography>
                       <Typography
-                        variant="body2"
                         gutterBottom
-                        sx={{ fontSize: { xs: 12.5, md: 14 } }}
+                        sx={{ fontSize:'12px' ,fontWeight: 300, color: '#D1D4C9' }}
                       >
                         {state.findStudent.studentAddress}
                       </Typography>
                       <Typography
-                        variant="body2"
                         gutterBottom
-                        sx={{ fontSize: { xs: 14, md: 14 } }}
+                        sx={{ fontSize:'12px' ,fontWeight: 300, color: '#D1D4C9' }}
                       >
                         {state.findStudent.studentNickname}
                       </Typography>
                       <Typography
-                        variant="body2"
                         gutterBottom
-                        sx={{ fontSize: { xs: 13, md: 14 } }}
+                        sx={{ fontSize:'12px' ,fontWeight: 300, color: '#D1D4C9' }}
                       >
                         {state.findStudent.studentSkills}
                       </Typography>
@@ -435,19 +433,19 @@ export default function StudentEvaluation() {
                     sx={{ textAlign: "left", alignItems: "center" }}
                   >
                     <Grid item xs>
-                      <Typography variant="body2" gutterBottom>
+                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
                         TeamWork:
                       </Typography>
-                      <Typography variant="body2" gutterBottom>
+                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
                         Creativity:
                       </Typography>
-                      <Typography variant="body2" gutterBottom>
+                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
                         Adaptability:
                       </Typography>
-                      <Typography variant="body2" gutterBottom>
+                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
                         Leadership:
                       </Typography>
-                      <Typography variant="body2" gutterBottom>
+                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
                         Persuasion:
                       </Typography>
                     </Grid>
@@ -536,11 +534,12 @@ export default function StudentEvaluation() {
                   sx={style.addRating}
                   value={overAll}
                   onChange={handleAllRating}
+                  emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
                 />
 
                 {open ? (
                   <Paper sx={style.showRating}>
-                    <Typography>Rating</Typography>
+                    <Typography sx={{color: '#D1D4C9', fontSize:'14px'}}>Rating</Typography>
                     <Box sx={style.boxAllRating}>
                       <Typography sx={style.allRatingTypography}>
                         Teamwork
@@ -554,6 +553,7 @@ export default function StudentEvaluation() {
                           console.log("Team work:" + newValue);
                           setTeamWork(newValue);
                         }}
+                        emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
                       />
                     </Box>
 
@@ -570,6 +570,7 @@ export default function StudentEvaluation() {
                           console.log("Creativity:" + newValue);
                           setCreativity(newValue);
                         }}
+                        emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
                       />
                     </Box>
 
@@ -586,6 +587,7 @@ export default function StudentEvaluation() {
                           console.log("Adaptability:" + newValue);
                           setAdaptability(newValue);
                         }}
+                        emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
                       />
                     </Box>
 
@@ -602,6 +604,7 @@ export default function StudentEvaluation() {
                           console.log("Leadership:" + newValue);
                           setLeadership(newValue);
                         }}
+                        emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
                       />
                     </Box>
 
@@ -618,23 +621,25 @@ export default function StudentEvaluation() {
                           console.log("Persuasion:" + newValue);
                           setPersuasion(newValue);
                         }}
+                        emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
                       />
                     </Box>
 
-                    <Typography>Share us your thoughts!</Typography>
-                    <FormControl fullWidth>
+                    <Typography sx={{color: '#D1D4C9'}}>Share us your thoughts!</Typography>
+                    <FormControl fullWidth sx={style.inputcomment}>
                       <OutlinedInput
                         placeholder="Please enter text"
                         rows={4}
                         multiline
                         onChange={handleCommentInfo}
                         value={commentMessage}
-                    
+                        
                       />
                     </FormControl>
                     <Button
+               
                       variant="contained"
-                      sx={{ mt: 3 }}
+                      sx={{ mt: 3, backgroundColor: '#26CE8D', width: '150px',}}
                       onClick={submitRating}
                     >
                       Submit
@@ -645,7 +650,7 @@ export default function StudentEvaluation() {
             </Box>
 
             <Box sx={style.boxFilter}>
-              <Typography color="textPrimary" sx={style.boxFilterTypog}>
+              <Typography color="#D1D4C9" sx={style.boxFilterTypog}>
                 Sort by:
               </Typography>
               <FormControl sx={style.formcontrol}>
@@ -705,21 +710,28 @@ export default function StudentEvaluation() {
                     <Grid item xs={10} sm container>
                       <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
-                          <Typography variant="body2" component="div">
+                          <Typography variant="body2" 
+                          sx={{color: '#D1D4C9',}}
+                          component="div">
                             {comment.commentEmail}
                           </Typography>
 
-                          <Typography variant="caption" color="text.secondary">
+                          <Typography variant="caption"
+                          sx={{color: '#62666D'}}
+                          color="text.secondary">
                             Posted {dayjs(comment.createdTime).fromNow()}
                           </Typography>
                         </Grid>
                         <Grid item>
                           <Typography component="legend"></Typography>
-                          <Rating value={value} readOnly sx={style.rating} />
+                          <Rating value={value} readOnly sx={style.rating}
+                          emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />} />
                         </Grid>
 
                         <Grid item>
-                          <Typography variant="body2">
+                          <Typography 
+                          sx={{color: '#D1D4C9'}}
+                          variant="body2">
                             {" "}
                             {comment.commentInfo}{" "}
                           </Typography>
@@ -728,7 +740,7 @@ export default function StudentEvaluation() {
                        
                         <Grid item xs container direction="row" spacing={2}>
                           <Grid item xs></Grid>
-                          <Grid item>
+                          <Grid item sx={{color: '#62666D'}}>
                             <IconButton
                               size="small"
                               color="inherit"
@@ -819,12 +831,15 @@ export default function StudentEvaluation() {
             </Grid>
 
             <Pagination
-              count={10}
-              sx={{ display: "flex", justifyContent: "center", my: 3 }}
+              count={5}
+              sx={{ display: "flex", justifyContent: "center", my: 3, "& .MuiPaginationItem-root": {
+                color: "#D1D4C9"
+              }}}
             />
           </Grid>
         </Grid>
       </Box>
+      <Footer/>
     </Box>
   );
 }
