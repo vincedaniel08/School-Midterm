@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
-import StarIcon from '@mui/icons-material/Star';
+import StarIcon from "@mui/icons-material/Star";
 import {
   Pagination,
   Grid,
@@ -17,7 +17,7 @@ import {
   IconButton,
 } from "@mui/material";
 import Footer from "./Footer";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import localizeFormat from "dayjs/plugin/localizedFormat";
@@ -36,7 +36,7 @@ import {
   addComment,
   getComment,
   getSubComment,
-  addSubComment
+  addSubComment,
   //editRating,
 } from "../redux/actions/userAction";
 
@@ -77,7 +77,6 @@ export default function StudentEvaluation() {
   const studentId = queryy.get("student");
   //console.log(studentId);
 
-
   const handleChangeSort = (event) => {
     setSort(event.target.value);
   };
@@ -86,49 +85,42 @@ export default function StudentEvaluation() {
   };
 
   const handleChangeComment = (comment) => {
-    
     setOpenComment(true);
   };
   const handleCommentInfo = (event) => {
     setCommentMessage(event.target.value);
- 
   };
   const handleSubCommentInfo = (event) => {
     setSubCommentMessage(event.target.value);
- 
   };
 
   const handleAllRating = (event, newValue) => {
-    
+    setOverAll(newValue);
     onAuthStateChanged(auth, (user) => {
-      if (user && newValue) {
+      if (user) {
         console.log("Overall: " + newValue);
-        setOverAll(newValue);
         setOpen(true);
         setTeamWork(newValue);
         setCreativity(newValue);
         setAdaptability(newValue);
         setLeadership(newValue);
         setPersuasion(newValue);
-         
-      } else {
-        dispatch(toggleProfile(true));
+       if (newValue === null) {
+      
         setOpen(false);
         setTeamWork(null);
         setCreativity(null);
         setAdaptability(null);
         setLeadership(null);
         setPersuasion(null);
-      }
+      }} else{dispatch(toggleProfile(true))}
     });
   };
   const submitRating = (e) => {
     e.preventDefault();
     console.log("overall rating:", overAll);
-    
-    onAuthStateChanged(auth, (user) => {
-      
 
+    onAuthStateChanged(auth, (user) => {
       setOpen(false);
       setOverAll(null);
       setTeamWork(null);
@@ -137,51 +129,46 @@ export default function StudentEvaluation() {
       setLeadership(null);
       setPersuasion(null);
       setCommentMessage("");
-      dispatch(addComment(
-        
-     {
-        id: Math.floor(Math.random() * (999 - 100 + 1) + 100),
-        commentEmail: user.email,
-        studentName: studentId,
-        commentInfo: commentMessage,
-        teamworkRating: teamWork,
-        creativityRating: creativity,
-        adaptabilityRating: adaptability,
-        leadershipRating:leadership,
-        persuasionRating: persuasion,
-        createdTime: new Date().getTime(),
-     }
-     )); 
-     dispatch(findStudent(studentId));
+      dispatch(
+        addComment({
+          id: Math.floor(Math.random() * (999 - 100 + 1) + 100),
+          commentEmail: user.email,
+          studentName: studentId,
+          commentInfo: commentMessage,
+          teamworkRating: teamWork,
+          creativityRating: creativity,
+          adaptabilityRating: adaptability,
+          leadershipRating: leadership,
+          persuasionRating: persuasion,
+          createdTime: new Date().getTime(),
+        })
+      );
+      dispatch(findStudent(studentId));
     });
-
   };
   const subComment = (comment) => {
     onAuthStateChanged(auth, (user) => {
-    dispatch(addSubComment(
-       
-      {
-         id: Math.floor(Math.random() * (999 - 100 + 1) + 100),
-         commentEmail: user.email,
-         studentName: studentId,
-         commentInfo: subCommentMessage,
-         createdTime: new Date().getTime(),
-      } 
-      ),state.findStudent.id); 
-    })
+      dispatch(
+        addSubComment({
+          id: Math.floor(Math.random() * (999 - 100 + 1) + 100),
+          commentEmail: user.email,
+          studentName: studentId,
+          commentInfo: subCommentMessage,
+          createdTime: new Date().getTime(),
+        }),
+        state.findStudent.id
+      );
+    });
     setSubCommentMessage("");
     setOpenComment(false);
-    setUserComment(comment.commentEmail)
-  
-
-  }
+    setUserComment(comment.commentEmail);
+  };
 
   useEffect(() => {
-   
     dispatch(findStudent(studentId));
     dispatch(getComment(studentId));
-    dispatch(getSubComment(studentId,userComment));
-  }, [dispatch, studentId,userComment]);
+    dispatch(getSubComment(studentId, userComment));
+  }, [dispatch, studentId, userComment]);
 
   //rating formula
 
@@ -279,16 +266,15 @@ export default function StudentEvaluation() {
 
   return (
     <Box sx={style.root}>
-       <Helmet>
-                <title>{studentId}</title>
-                <meta
-                  name={studentId}
-                  content="Teamwork, Creativity, Adaptability, Leadership, Persuasion"
-                />
-                
-            </Helmet>
+      <Helmet>
+        <title>{studentId}</title>
+        <meta
+          name={studentId}
+          content="Teamwork, Creativity, Adaptability, Leadership, Persuasion"
+        />
+      </Helmet>
       <Header />
-      <Box sx={{ width: "100%" ,backgroundColor: '#131414',}}>
+      <Box sx={{ width: "100%", backgroundColor: "#131414" }}>
         <Grid
           container
           direction="row"
@@ -296,7 +282,7 @@ export default function StudentEvaluation() {
           alignItems="center"
           rowSpacing={5}
           spacing={10}
-          sx={{ my: 1,  }}
+          sx={{ my: 1 }}
         >
           <Grid item>
             <Paper sx={style.paper}>
@@ -314,7 +300,7 @@ export default function StudentEvaluation() {
                     <Img
                       alt="complex"
                       src={state.findStudent.image}
-                      sx={{ borderRadius: 1, border: '1px solid #D1D4C9' }}
+                      sx={{ borderRadius: 1, border: "1px solid #D1D4C9" }}
                     />
                   </ButtonBase>
                   <Rating
@@ -322,7 +308,9 @@ export default function StudentEvaluation() {
                     readOnly
                     sx={style.rating}
                     precision={0.5}
-                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                    emptyIcon={
+                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    }
                   />
                   <Box sx={style.boxLeftProfile}>
                     <Typography sx={style.leftProfileValue}>
@@ -352,26 +340,64 @@ export default function StudentEvaluation() {
                     <Typography sx={style.studenttitlename}>
                       {state.findStudent.studentName}
                     </Typography>
-                    <Typography variant="inherit" sx={{ ml: 2, color: '#D1D4C9' }}>
+                    <Typography
+                      variant="inherit"
+                      sx={{ ml: 2, color: "#D1D4C9" }}
+                    >
                       BSIT4B
                     </Typography>
                   </Box>
 
                   <Grid item xs container direction="column" spacing={10}>
-                    <Grid item xs >
-                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}}gutterBottom>
+                    <Grid item xs>
+                      <Typography
+                        sx={{
+                          color: "#D1D4C9",
+                          fontWeight: 500,
+                          fontSize: "12px",
+                        }}
+                        gutterBottom
+                      >
                         Gender:
                       </Typography>
-                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
+                      <Typography
+                        sx={{
+                          color: "#D1D4C9",
+                          fontWeight: 500,
+                          fontSize: "12px",
+                        }}
+                        gutterBottom
+                      >
                         Birthday:
                       </Typography>
-                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
+                      <Typography
+                        sx={{
+                          color: "#D1D4C9",
+                          fontWeight: 500,
+                          fontSize: "12px",
+                        }}
+                        gutterBottom
+                      >
                         Address
                       </Typography>
-                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
+                      <Typography
+                        sx={{
+                          color: "#D1D4C9",
+                          fontWeight: 500,
+                          fontSize: "12px",
+                        }}
+                        gutterBottom
+                      >
                         Nickname:
                       </Typography>
-                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
+                      <Typography
+                        sx={{
+                          color: "#D1D4C9",
+                          fontWeight: 500,
+                          fontSize: "12px",
+                        }}
+                        gutterBottom
+                      >
                         Skills/Language:
                       </Typography>
                     </Grid>
@@ -393,31 +419,51 @@ export default function StudentEvaluation() {
                       <Typography></Typography>
                       <Typography
                         gutterBottom
-                        sx={{ fontSize:'12px' ,fontWeight: 300, color: '#D1D4C9' }}
+                        sx={{
+                          fontSize: "12px",
+                          fontWeight: 300,
+                          color: "#D1D4C9",
+                        }}
                       >
                         {state.findStudent.studentGender}
                       </Typography>
                       <Typography
                         gutterBottom
-                        sx={{ fontSize:'12px' ,fontWeight: 300, color: '#D1D4C9' }}
+                        sx={{
+                          fontSize: "12px",
+                          fontWeight: 300,
+                          color: "#D1D4C9",
+                        }}
                       >
                         {state.findStudent.studentBirthdate}
                       </Typography>
                       <Typography
                         gutterBottom
-                        sx={{ fontSize:'12px' ,fontWeight: 300, color: '#D1D4C9' }}
+                        sx={{
+                          fontSize: "12px",
+                          fontWeight: 300,
+                          color: "#D1D4C9",
+                        }}
                       >
                         {state.findStudent.studentAddress}
                       </Typography>
                       <Typography
                         gutterBottom
-                        sx={{ fontSize:'12px' ,fontWeight: 300, color: '#D1D4C9' }}
+                        sx={{
+                          fontSize: "12px",
+                          fontWeight: 300,
+                          color: "#D1D4C9",
+                        }}
                       >
                         {state.findStudent.studentNickname}
                       </Typography>
                       <Typography
                         gutterBottom
-                        sx={{ fontSize:'12px' ,fontWeight: 300, color: '#D1D4C9' }}
+                        sx={{
+                          fontSize: "12px",
+                          fontWeight: 300,
+                          color: "#D1D4C9",
+                        }}
                       >
                         {state.findStudent.studentSkills}
                       </Typography>
@@ -433,19 +479,54 @@ export default function StudentEvaluation() {
                     sx={{ textAlign: "left", alignItems: "center" }}
                   >
                     <Grid item xs>
-                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
+                      <Typography
+                        sx={{
+                          color: "#D1D4C9",
+                          fontWeight: 500,
+                          fontSize: "12px",
+                        }}
+                        gutterBottom
+                      >
                         TeamWork:
                       </Typography>
-                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
+                      <Typography
+                        sx={{
+                          color: "#D1D4C9",
+                          fontWeight: 500,
+                          fontSize: "12px",
+                        }}
+                        gutterBottom
+                      >
                         Creativity:
                       </Typography>
-                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
+                      <Typography
+                        sx={{
+                          color: "#D1D4C9",
+                          fontWeight: 500,
+                          fontSize: "12px",
+                        }}
+                        gutterBottom
+                      >
                         Adaptability:
                       </Typography>
-                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
+                      <Typography
+                        sx={{
+                          color: "#D1D4C9",
+                          fontWeight: 500,
+                          fontSize: "12px",
+                        }}
+                        gutterBottom
+                      >
                         Leadership:
                       </Typography>
-                      <Typography sx={{color: '#D1D4C9', fontWeight: 500, fontSize: '12px'}} gutterBottom>
+                      <Typography
+                        sx={{
+                          color: "#D1D4C9",
+                          fontWeight: 500,
+                          fontSize: "12px",
+                        }}
+                        gutterBottom
+                      >
                         Persuasion:
                       </Typography>
                     </Grid>
@@ -472,7 +553,7 @@ export default function StudentEvaluation() {
                             : style.boxRightScoreRed
                         }
                       >
-                        <Typography color="textPrimary" variant="caption">
+                        <Typography color="white"variant="caption">
                           {teamworkRatingAverage.toFixed(1)}
                         </Typography>
                       </Box>
@@ -483,7 +564,7 @@ export default function StudentEvaluation() {
                             : style.boxRightScoreRed
                         }
                       >
-                        <Typography color="textPrimary" variant="caption">
+                        <Typography color="white" variant="caption">
                           {creativityRatingAverage.toFixed(1)}
                         </Typography>
                       </Box>
@@ -494,7 +575,7 @@ export default function StudentEvaluation() {
                             : style.boxRightScoreRed
                         }
                       >
-                        <Typography color="textPrimary" variant="caption">
+                        <Typography color="white" variant="caption">
                           {adaptabilityRatingAverage.toFixed(1)}
                         </Typography>
                       </Box>
@@ -505,7 +586,7 @@ export default function StudentEvaluation() {
                             : style.boxRightScoreRed
                         }
                       >
-                        <Typography color="textPrimary" variant="caption">
+                        <Typography color="white" variant="caption">
                           {leadershipRatingAverage.toFixed(1)}
                         </Typography>
                       </Box>
@@ -516,7 +597,7 @@ export default function StudentEvaluation() {
                             : style.boxRightScoreRed
                         }
                       >
-                        <Typography color="textPrimary" variant="caption">
+                        <Typography color="white" variant="caption">
                           {persuasionRatingAverage.toFixed(1)}
                         </Typography>
                       </Box>
@@ -531,15 +612,23 @@ export default function StudentEvaluation() {
                 <Typography> Add your Rating</Typography>
 
                 <Rating
-                  sx={style.addRating}
+                    sx={
+                      overAll>  2.5
+                        ? style.addRating
+                        :  overAll === 0 ? style.addRating : style.addRatingRed
+                    }
                   value={overAll}
                   onChange={handleAllRating}
-                  emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
+                  emptyIcon={
+                    <StarIcon style={{ opacity: 2 }} fontSize="inherit" />
+                  }
                 />
 
                 {open ? (
                   <Paper sx={style.showRating}>
-                    <Typography sx={{color: '#D1D4C9', fontSize:'14px'}}>Rating</Typography>
+                    <Typography sx={{ color: "#D1D4C9", fontSize: "14px" }}>
+                      Rating
+                    </Typography>
                     <Box sx={style.boxAllRating}>
                       <Typography sx={style.allRatingTypography}>
                         Teamwork
@@ -547,13 +636,20 @@ export default function StudentEvaluation() {
 
                       <Rating
                         fontSize="inherit"
-                        sx={style.addRating}
+                        sx={
+                          teamWork >  2.5
+                            ? style.addRating
+                            :  overAll === 0 ? style.addRating : style.addRatingRed
+                        }
                         value={teamWork}
                         onChange={(event, newValue) => {
                           console.log("Team work:" + newValue);
                           setTeamWork(newValue);
+                          setOverAll((newValue+creativity+adaptability+leadership+persuasion) / (5))
                         }}
-                        emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
+                        emptyIcon={
+                          <StarIcon style={{ opacity: 2 }} fontSize="inherit" />
+                        }
                       />
                     </Box>
 
@@ -564,13 +660,20 @@ export default function StudentEvaluation() {
 
                       <Rating
                         fontSize="inherit"
-                        sx={style.addRating}
+                        sx={
+                          creativity >  2.5
+                            ? style.addRating
+                            :  overAll === 0 ? style.addRating : style.addRatingRed
+                        }
                         value={creativity}
                         onChange={(event, newValue) => {
                           console.log("Creativity:" + newValue);
                           setCreativity(newValue);
+                          setOverAll((teamWork+newValue+adaptability+leadership+persuasion) / (5))
                         }}
-                        emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
+                        emptyIcon={
+                          <StarIcon style={{ opacity: 2 }} fontSize="inherit" />
+                        }
                       />
                     </Box>
 
@@ -581,13 +684,20 @@ export default function StudentEvaluation() {
 
                       <Rating
                         fontSize="inherit"
-                        sx={style.addRating}
+                        sx={
+                          adaptability >  2.5
+                            ? style.addRating
+                            :  overAll === 0 ? style.addRating : style.addRatingRed
+                        }
                         value={adaptability}
                         onChange={(event, newValue) => {
                           console.log("Adaptability:" + newValue);
                           setAdaptability(newValue);
+                          setOverAll((teamWork+creativity+newValue+leadership+persuasion) / (5))
                         }}
-                        emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
+                        emptyIcon={
+                          <StarIcon style={{ opacity: 2 }} fontSize="inherit" />
+                        }
                       />
                     </Box>
 
@@ -598,13 +708,20 @@ export default function StudentEvaluation() {
 
                       <Rating
                         fontSize="inherit"
-                        sx={style.addRating}
+                        sx={
+                          leadership >  2.5
+                            ? style.addRating
+                            :  overAll === 0 ? style.addRating : style.addRatingRed
+                        }
                         value={leadership}
                         onChange={(event, newValue) => {
                           console.log("Leadership:" + newValue);
                           setLeadership(newValue);
+                          setOverAll((teamWork+creativity+adaptability+newValue+persuasion) / (5))
                         }}
-                        emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
+                        emptyIcon={
+                          <StarIcon style={{ opacity: 2 }} fontSize="inherit" />
+                        }
                       />
                     </Box>
 
@@ -615,17 +732,26 @@ export default function StudentEvaluation() {
 
                       <Rating
                         fontSize="inherit"
-                        sx={style.addRating}
+                        sx={
+                          persuasion > 2.5
+                            ? style.addRating
+                            :  overAll === 0 ? style.addRating : style.addRatingRed
+                        }
                         value={persuasion}
                         onChange={(event, newValue) => {
                           console.log("Persuasion:" + newValue);
                           setPersuasion(newValue);
+                          setOverAll((teamWork+creativity+adaptability+leadership+newValue) / (5))
                         }}
-                        emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />}
+                        emptyIcon={
+                          <StarIcon style={{ opacity: 2 }} fontSize="inherit" />
+                        }
                       />
                     </Box>
 
-                    <Typography sx={{color: '#D1D4C9'}}>Share us your thoughts!</Typography>
+                    <Typography sx={{ color: "#D1D4C9" }}>
+                      Share us your thoughts!
+                    </Typography>
                     <FormControl fullWidth sx={style.inputcomment}>
                       <OutlinedInput
                         placeholder="Please enter text"
@@ -633,13 +759,11 @@ export default function StudentEvaluation() {
                         multiline
                         onChange={handleCommentInfo}
                         value={commentMessage}
-                        
                       />
                     </FormControl>
                     <Button
-               
                       variant="contained"
-                      sx={{ mt: 3, backgroundColor: '#26CE8D', width: '150px',}}
+                      sx={{ mt: 3, backgroundColor: "#26CE8D", width: "150px" }}
                       onClick={submitRating}
                     >
                       Submit
@@ -657,12 +781,9 @@ export default function StudentEvaluation() {
                 <Select
                   value={sort}
                   onChange={handleChangeSort}
-                  
                   size="small"
                   sx={style.select}
-                 
                 >
-              
                   <MenuItem value={10}>Most Recent</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
@@ -710,50 +831,57 @@ export default function StudentEvaluation() {
                     <Grid item xs={10} sm container>
                       <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
-                          <Typography variant="body2" 
-                          sx={{color: '#D1D4C9',}}
-                          component="div">
+                          <Typography
+                            variant="body2"
+                            sx={{ color: "#D1D4C9" }}
+                            component="div"
+                          >
                             {comment.commentEmail}
                           </Typography>
 
-                          <Typography variant="caption"
-                          sx={{color: '#62666D'}}
-                          color="text.secondary">
+                          <Typography
+                            variant="caption"
+                            sx={{ color: "#62666D" }}
+                            color="text.secondary"
+                          >
                             Posted {dayjs(comment.createdTime).fromNow()}
                           </Typography>
                         </Grid>
                         <Grid item>
                           <Typography component="legend"></Typography>
-                          <Rating value={value} readOnly sx={style.rating}
-                          emptyIcon={<StarIcon style={{ opacity: 2}} fontSize="inherit" />} />
+                          <Rating
+                            value={value}
+                            readOnly
+                            sx={style.rating}
+                            emptyIcon={
+                              <StarIcon
+                                style={{ opacity: 2 }}
+                                fontSize="inherit"
+                              />
+                            }
+                          />
                         </Grid>
 
                         <Grid item>
-                          <Typography 
-                          sx={{color: '#D1D4C9'}}
-                          variant="body2">
+                          <Typography sx={{ color: "#D1D4C9" }} variant="body2">
                             {" "}
                             {comment.commentInfo}{" "}
                           </Typography>
                         </Grid>
-                        
-                       
+
                         <Grid item xs container direction="row" spacing={2}>
                           <Grid item xs></Grid>
-                          <Grid item sx={{color: '#62666D'}}>
+                          <Grid item sx={{ color: "#62666D" }}>
                             <IconButton
                               size="small"
                               color="inherit"
                               onClick={handleChangeComment}
                             >
                               <ChatBubbleOutlineOutlinedIcon />
-                           
+
                               <Typography sx={style.commentIconTypogpraphy}>
                                 {state.subComments.length} comments
-                                </Typography>
-                               
-                          
-                              
+                              </Typography>
                             </IconButton>
 
                             <IconButton size="small" color="inherit">
@@ -761,12 +889,10 @@ export default function StudentEvaluation() {
                               <Typography sx={style.commentIconTypogpraphy}>
                                 Report
                               </Typography>
-                            
                             </IconButton>
                           </Grid>
                         </Grid>
-                      
-                        
+
                         {/** Open Comment */}
                         {openComment ? (
                           <Paper sx={style.showComment}>
@@ -792,37 +918,41 @@ export default function StudentEvaluation() {
                                   onChange={handleSubCommentInfo}
                                 />
                               </FormControl>
-                              <Button variant="contained" sx={{ m: 2 }} onClick={()=>subComment(comment)}>
+                              <Button
+                                variant="contained"
+                                sx={{ m: 2 }}
+                                onClick={() => subComment(comment)}
+                              >
                                 Submit
                               </Button>
                             </Box>
                           </Paper>
                         ) : null}
 
-                         {state.subComments.map((sub, index) => (
-                        <Paper sx={style.showComment} key={index + 1}>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "left",
-                            }}
-                          >
-                            <ReplyOutlinedIcon fontSize="medium" />
-                            <Typography variant="caption" sx={{ mx: 1 }}>
-                              {sub.commentEmail}
-                            </Typography>
-                            <Typography variant="caption">
-                            {dayjs(sub.createdTime).fromNow()}
-                            </Typography>
-                          </Box>
-                          <Box sx={style.boxAllRating}>
-                            <Typography variant="caption">
-                            {sub.commentInfo}
-                            </Typography>
-                          </Box>
-                        </Paper>
-                             ))}
+                        {state.subComments.map((sub, index) => (
+                          <Paper sx={style.showComment} key={index + 1}>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "left",
+                              }}
+                            >
+                              <ReplyOutlinedIcon fontSize="medium" />
+                              <Typography variant="caption" sx={{ mx: 1 }}>
+                                {sub.commentEmail}
+                              </Typography>
+                              <Typography variant="caption">
+                                {dayjs(sub.createdTime).fromNow()}
+                              </Typography>
+                            </Box>
+                            <Box sx={style.boxAllRating}>
+                              <Typography variant="caption">
+                                {sub.commentInfo}
+                              </Typography>
+                            </Box>
+                          </Paper>
+                        ))}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -832,14 +962,19 @@ export default function StudentEvaluation() {
 
             <Pagination
               count={5}
-              sx={{ display: "flex", justifyContent: "center", my: 3, "& .MuiPaginationItem-root": {
-                color: "#D1D4C9"
-              }}}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                my: 3,
+                "& .MuiPaginationItem-root": {
+                  color: "#D1D4C9",
+                },
+              }}
             />
           </Grid>
         </Grid>
       </Box>
-      <Footer/>
+      <Footer />
     </Box>
   );
 }

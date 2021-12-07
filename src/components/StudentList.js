@@ -25,6 +25,7 @@ import style from "../style/studentList";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import usePagination from "../components/Pagination"
 
 const Img = styled("img")({
   margin: "auto",
@@ -39,9 +40,15 @@ export default function StudentList() {
   const state = useSelector((state) => state.user);
   const [sort, setSort] = useState(10);
   const [filter, setFilter] = useState(10);
-
+  const [page, setPage] = useState(1);
   // const [overallRating, setOverallRating] = useState(0);
+  const PER_PAGE = 5;
+  const _DATA = usePagination(state.students, PER_PAGE);
 
+  const handleChangePagination = (event, newValue) => {
+    setPage(newValue);
+    _DATA.jump(newValue);
+  };
   const handleChangeSort = (event) => {
     setSort(event.target.value);
   };
@@ -172,10 +179,11 @@ export default function StudentList() {
           spacing={2}
           sx={{ my: 1 }}
         >
-          {state.students &&
-            state.students.map((student, index) => {
+          
+          { 
+           state.students.slice(0, 4).map((student, index) => {
               return (
-                <Paper sx={style.paper} key={index + 1}>
+                <Paper sx={style.paper} key={index + 1} film={index + 1}>
                   <Grid container spacing={2}>
                     <Grid item>
                       <ButtonBase sx={{ width: 50, height: 50 }}>
@@ -335,8 +343,8 @@ export default function StudentList() {
             />
           </ListItem>
 
-          {state.students &&
-            state.students.map((student, index) => {
+       
+           { _DATA.currentData().map((student, index) => {
               return (
                 <Paper sx={{ my: 1 , backgroundColor: '#1E1F20', border: '1px solid #303336'}} key={index + 1}>
                   <ListItemButton
@@ -388,13 +396,18 @@ export default function StudentList() {
               );
             })}
         </List>
-      </Box>
+     
       <Pagination
-        count={3}
-        sx={{ display: "flex", justifyContent: "center", my: 3,  "& .MuiPaginationItem-root": {
+       
+        count={Math.ceil(state.students.length / PER_PAGE)}
+        page={page}
+        onChange={handleChangePagination}
+        sx={{ display: "flex", justifyContent: "center", my: 3, "& .MuiPaginationItem-root": {
           color: "#D1D4C9"
         } }}
       />
+       </Box>
+
     </Box>
     </Box>
   );

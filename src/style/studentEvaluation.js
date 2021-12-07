@@ -190,7 +190,7 @@ const style = {
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    
+
   },
   addRating: {
     fontSize: {
@@ -200,6 +200,15 @@ const style = {
     },
     my: 2,
     color: '#26CE8D',
+  },
+  addRatingRed: {
+    fontSize: {
+      xs: 25,
+      sm: 30,
+      md: 40
+    },
+    my: 2,
+    color: '#FF0000',
   },
 
   showRating: {
