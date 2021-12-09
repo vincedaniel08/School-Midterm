@@ -32,7 +32,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { auth } from "../utils/firebase";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   indicator: {
@@ -201,8 +201,9 @@ export default function Header() {
                 horizontal: 'left',
 
               }}
-
+ 
             >
+            
               <MenuItem onClick={handleGotoList}>Student List </MenuItem>
               <MenuItem onClick={handleGotoEvaluation}>Student Evaluation</MenuItem>
 
@@ -220,8 +221,14 @@ export default function Header() {
                 indicator: classes.indicator,
               }}
             >
-              <StyledTab label="Student List" value={1} />
-              <StyledTab label="Student Evaluation" value={2} />
+              
+            
+              <StyledTab label="Student List" value={1} >
+              <Link href="/" underline="none"/>
+              </StyledTab>
+              <StyledTab label="Student Evaluation" value={2} >
+              <Link href="/" underline="none"/>
+              </StyledTab>
               <StyledTab label="Blog" value={3} />
             </StyledTabs>
 

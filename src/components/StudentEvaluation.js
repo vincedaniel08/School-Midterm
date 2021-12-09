@@ -22,6 +22,8 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import localizeFormat from "dayjs/plugin/localizedFormat";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { styled } from "@mui/material/styles";
 import style from "../style/studentEvaluation";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
@@ -55,7 +57,6 @@ const Img = styled("img")({
 export default function StudentEvaluation() {
   const state = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [value] = useState(4);
   const [overAll, setOverAll] = useState(0);
   const [teamWork, setTeamWork] = useState(0);
   const [creativity, setCreativity] = useState(0);
@@ -105,15 +106,29 @@ export default function StudentEvaluation() {
         setAdaptability(newValue);
         setLeadership(newValue);
         setPersuasion(newValue);
-       if (newValue === null) {
-      
-        setOpen(false);
-        setTeamWork(null);
-        setCreativity(null);
-        setAdaptability(null);
-        setLeadership(null);
-        setPersuasion(null);
-      }} else{dispatch(toggleProfile(true))}
+        if (newValue === null) {
+          setOpen(false);
+          setTeamWork(null);
+          setCreativity(null);
+          setAdaptability(null);
+          setLeadership(null);
+          setPersuasion(null);
+        }
+        if (state.comments.find((item) => item.commentEmail === user.email)) {
+          toast.warn(
+            "Hi! " + user.displayName +  + ",You've already commented"
+          );
+          setOverAll(null);
+          setOpen(false);
+          setTeamWork(null);
+          setCreativity(null);
+          setAdaptability(null);
+          setLeadership(null);
+          setPersuasion(null);
+        }
+      } else {
+        dispatch(toggleProfile(true));
+      }
     });
   };
   const submitRating = (e) => {
@@ -273,6 +288,18 @@ export default function StudentEvaluation() {
           content="Teamwork, Creativity, Adaptability, Leadership, Persuasion"
         />
       </Helmet>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
       <Header />
       <Box sx={{ width: "100%", backgroundColor: "#131414" }}>
         <Grid
@@ -553,7 +580,7 @@ export default function StudentEvaluation() {
                             : style.boxRightScoreRed
                         }
                       >
-                        <Typography color="white"variant="caption">
+                        <Typography color="white" variant="caption">
                           {teamworkRatingAverage.toFixed(1)}
                         </Typography>
                       </Box>
@@ -612,11 +639,13 @@ export default function StudentEvaluation() {
                 <Typography> Add your Rating</Typography>
 
                 <Rating
-                    sx={
-                      overAll>  2.5
-                        ? style.addRating
-                        :  overAll === 0 ? style.addRating : style.addRatingRed
-                    }
+                  sx={
+                    overAll > 2.5
+                      ? style.addRating
+                      : overAll === 0
+                      ? style.addRating
+                      : style.addRatingRed
+                  }
                   value={overAll}
                   onChange={handleAllRating}
                   emptyIcon={
@@ -637,15 +666,24 @@ export default function StudentEvaluation() {
                       <Rating
                         fontSize="inherit"
                         sx={
-                          teamWork >  2.5
+                          teamWork > 2.5
                             ? style.addRating
-                            :  overAll === 0 ? style.addRating : style.addRatingRed
+                            : overAll === 0
+                            ? style.addRating
+                            : style.addRatingRed
                         }
                         value={teamWork}
                         onChange={(event, newValue) => {
                           console.log("Team work:" + newValue);
                           setTeamWork(newValue);
-                          setOverAll((newValue+creativity+adaptability+leadership+persuasion) / (5))
+                          setOverAll(
+                            (newValue +
+                              creativity +
+                              adaptability +
+                              leadership +
+                              persuasion) /
+                              5
+                          );
                         }}
                         emptyIcon={
                           <StarIcon style={{ opacity: 2 }} fontSize="inherit" />
@@ -661,15 +699,24 @@ export default function StudentEvaluation() {
                       <Rating
                         fontSize="inherit"
                         sx={
-                          creativity >  2.5
+                          creativity > 2.5
                             ? style.addRating
-                            :  overAll === 0 ? style.addRating : style.addRatingRed
+                            : overAll === 0
+                            ? style.addRating
+                            : style.addRatingRed
                         }
                         value={creativity}
                         onChange={(event, newValue) => {
                           console.log("Creativity:" + newValue);
                           setCreativity(newValue);
-                          setOverAll((teamWork+newValue+adaptability+leadership+persuasion) / (5))
+                          setOverAll(
+                            (teamWork +
+                              newValue +
+                              adaptability +
+                              leadership +
+                              persuasion) /
+                              5
+                          );
                         }}
                         emptyIcon={
                           <StarIcon style={{ opacity: 2 }} fontSize="inherit" />
@@ -685,15 +732,24 @@ export default function StudentEvaluation() {
                       <Rating
                         fontSize="inherit"
                         sx={
-                          adaptability >  2.5
+                          adaptability > 2.5
                             ? style.addRating
-                            :  overAll === 0 ? style.addRating : style.addRatingRed
+                            : overAll === 0
+                            ? style.addRating
+                            : style.addRatingRed
                         }
                         value={adaptability}
                         onChange={(event, newValue) => {
                           console.log("Adaptability:" + newValue);
                           setAdaptability(newValue);
-                          setOverAll((teamWork+creativity+newValue+leadership+persuasion) / (5))
+                          setOverAll(
+                            (teamWork +
+                              creativity +
+                              newValue +
+                              leadership +
+                              persuasion) /
+                              5
+                          );
                         }}
                         emptyIcon={
                           <StarIcon style={{ opacity: 2 }} fontSize="inherit" />
@@ -709,15 +765,24 @@ export default function StudentEvaluation() {
                       <Rating
                         fontSize="inherit"
                         sx={
-                          leadership >  2.5
+                          leadership > 2.5
                             ? style.addRating
-                            :  overAll === 0 ? style.addRating : style.addRatingRed
+                            : overAll === 0
+                            ? style.addRating
+                            : style.addRatingRed
                         }
                         value={leadership}
                         onChange={(event, newValue) => {
                           console.log("Leadership:" + newValue);
                           setLeadership(newValue);
-                          setOverAll((teamWork+creativity+adaptability+newValue+persuasion) / (5))
+                          setOverAll(
+                            (teamWork +
+                              creativity +
+                              adaptability +
+                              newValue +
+                              persuasion) /
+                              5
+                          );
                         }}
                         emptyIcon={
                           <StarIcon style={{ opacity: 2 }} fontSize="inherit" />
@@ -735,13 +800,22 @@ export default function StudentEvaluation() {
                         sx={
                           persuasion > 2.5
                             ? style.addRating
-                            :  overAll === 0 ? style.addRating : style.addRatingRed
+                            : overAll === 0
+                            ? style.addRating
+                            : style.addRatingRed
                         }
                         value={persuasion}
                         onChange={(event, newValue) => {
                           console.log("Persuasion:" + newValue);
                           setPersuasion(newValue);
-                          setOverAll((teamWork+creativity+adaptability+leadership+newValue) / (5))
+                          setOverAll(
+                            (teamWork +
+                              creativity +
+                              adaptability +
+                              leadership +
+                              newValue) /
+                              5
+                          );
                         }}
                         emptyIcon={
                           <StarIcon style={{ opacity: 2 }} fontSize="inherit" />
@@ -802,7 +876,6 @@ export default function StudentEvaluation() {
                   sx={style.select}
                   inputProps={{ "aria-label": "Without label" }}
                 >
-                  <MenuItem value=""></MenuItem>
                   <MenuItem value={10}>No Filter</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
@@ -850,9 +923,26 @@ export default function StudentEvaluation() {
                         <Grid item>
                           <Typography component="legend"></Typography>
                           <Rating
-                            value={value}
+                            sx={
+                              (comment.teamworkRating +
+                                comment.creativityRating +
+                                comment.adaptabilityRating +
+                                comment.leadershipRating +
+                                comment.persuasionRating) /
+                                5 >
+                              2
+                                ? style.rating
+                                : style.ratingRed
+                            }
+                            value={
+                              (comment.teamworkRating +
+                                comment.creativityRating +
+                                comment.adaptabilityRating +
+                                comment.leadershipRating +
+                                comment.persuasionRating) /
+                              5
+                            }
                             readOnly
-                            sx={style.rating}
                             emptyIcon={
                               <StarIcon
                                 style={{ opacity: 2 }}
@@ -861,14 +951,12 @@ export default function StudentEvaluation() {
                             }
                           />
                         </Grid>
-
                         <Grid item>
                           <Typography sx={{ color: "#D1D4C9" }} variant="body2">
                             {" "}
                             {comment.commentInfo}{" "}
                           </Typography>
                         </Grid>
-
                         <Grid item xs container direction="row" spacing={2}>
                           <Grid item xs></Grid>
                           <Grid item sx={{ color: "#62666D" }}>
@@ -892,7 +980,6 @@ export default function StudentEvaluation() {
                             </IconButton>
                           </Grid>
                         </Grid>
-
                         {/** Open Comment */}
                         {openComment ? (
                           <Paper sx={style.showComment}>
@@ -909,8 +996,13 @@ export default function StudentEvaluation() {
                               </Typography>
                             </Box>
                             <Box sx={style.boxAllRating}>
-                              <FormControl fullWidth>
+                              <FormControl
+                                fullWidth
+                              
+                              >
                                 <OutlinedInput
+                                 
+                                
                                   placeholder="Please enter text"
                                   rows={2}
                                   multiline
@@ -920,7 +1012,7 @@ export default function StudentEvaluation() {
                               </FormControl>
                               <Button
                                 variant="contained"
-                                sx={{ m: 2 }}
+                                sx={{ m: 2, backgroundColor: "#26CE8D" }}
                                 onClick={() => subComment(comment)}
                               >
                                 Submit
@@ -928,10 +1020,10 @@ export default function StudentEvaluation() {
                             </Box>
                           </Paper>
                         ) : null}
-
                         {state.subComments.map((sub, index) => (
-                          <Paper sx={style.showComment} key={index + 1}>
+                          <Paper noWrap sx={style.showComment} key={index + 1}>
                             <Box
+                              maxItems={2}
                               sx={{
                                 display: "flex",
                                 alignItems: "center",
@@ -947,12 +1039,13 @@ export default function StudentEvaluation() {
                               </Typography>
                             </Box>
                             <Box sx={style.boxAllRating}>
-                              <Typography variant="caption">
+                              <Typography variant="caption" sx={{ ml: 4 }}>
                                 {sub.commentInfo}
                               </Typography>
                             </Box>
                           </Paper>
                         ))}
+                      
                       </Grid>
                     </Grid>
                   </Grid>

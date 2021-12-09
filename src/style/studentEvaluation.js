@@ -39,9 +39,13 @@ const style = {
     fontSize: 13,
     color: '#D1D4C9',
     border: '1px solid #303336',
+    "& .MuiSvgIcon-root": {
+      color: "white",
+    },
   },
   formcontrol: {
     minWidth: 100,
+    
 
   },
   paper: {
@@ -74,6 +78,16 @@ const style = {
     },
     mr: 2,
     color: '#26CE8D',
+    mt: '15px',
+  },
+  ratingRed: {
+    fontSize: {
+      xs: 10,
+      sm: 20,
+      md: 25,
+    },
+    mr: 2,
+    color: '#FF0000',
     mt: '15px',
   },
   boxLeftProfile: {

@@ -50,6 +50,9 @@ const style = {
     fontSize: 12,
     color: '#D1D4C9',
     border: '1px solid #303336',
+    "& .MuiSvgIcon-root": {
+      color: "white",
+    },
   },
   formcontrol: {
     minWidth: 100,
