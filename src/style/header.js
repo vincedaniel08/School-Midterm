@@ -46,8 +46,33 @@ const style = {
       xs: "none",
       md: "flex"
     },
+    fontSize:"16px",
+    fontWeight: 400,
+
     
   },
+  link:{
+    lineHeight:"20px",
+    fontSize:"14px",
+    fontWeight: 400,
+    color:"white"
+   
+  },
+  linkContainer:{
+    display: "flex",
+    flexDirection:"column",
+    alignItems: "center",
+    mr:8
+  
+  },
+  indicator:{
+    mb:.5,
+    height: "3px",
+    width: "18px",
+    backgroundColor:"#26CE8D",
+    borderRadius:3
+  },
+
 };
 
 export default style;

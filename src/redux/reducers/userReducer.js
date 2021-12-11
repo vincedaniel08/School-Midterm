@@ -274,7 +274,7 @@ const initialState = {
       persuasionTwo: 0,
       persuasionOne: 0,
       image:
-        "https://scontent.fmnl3-4.fna.fbcdn.net/v/t39.30808-6/217651122_2698907126899881_3295613887006229915_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeE_VYOD4jnKXWdgDZ3AEV48HmQ354RwFC8eZDfnhHAULzDx_qqhKv8cVPheoG92Yj7uETOUUOjsnclevLgTEJB8&_nc_ohc=Iuo28u00MRAAX85oQxN&_nc_oc=AQkQRilFdaMYnedJ3OsphdTVYeze80sWAnirvrkukPoSMx2owwQ0_Cgnqk2Ykd7-TW8&_nc_ht=scontent.fmnl3-4.fna&oh=960b90090286e3721184aad289d7136d&oe=61B3CB2E",
+        "https://firebasestorage.googleapis.com/v0/b/midterm-4th-year.appspot.com/o/luisa.jpg?alt=media&token=93925954-4bf9-4a63-b770-1e5ac766ba5c",
       comments: [
         {
           id: 1,
@@ -320,7 +320,7 @@ const initialState = {
       persuasionTwo: 0,
       persuasionOne: 0,
       image:
-        "https://scontent.fmnl3-3.fna.fbcdn.net/v/t39.30808-6/244424580_1525808381103506_4444261260433284601_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeEG4vSTmkDpmZwJn0a25Ow1tICr8oZi-J-0gKvyhmL4n-fN7ECVOzc-CHYRVSWqVvBGeij3w7tG_kr0wAhVqiJ-&_nc_ohc=5P4GPyNgal8AX8LrjDA&_nc_ht=scontent.fmnl3-3.fna&oh=e50e0841410d4738a0039291a6b70b91&oe=61B3EF68",
+        "https://firebasestorage.googleapis.com/v0/b/midterm-4th-year.appspot.com/o/ivan.jpg?alt=media&token=ae5496fc-cf55-44f3-92b8-87274cfc91fe",
       comments: [
         {
           id: 1,
@@ -366,7 +366,7 @@ const initialState = {
       persuasionTwo: 0,
       persuasionOne: 0,
       image:
-        "https://scontent.fmnl3-1.fna.fbcdn.net/v/t39.30808-6/240833968_2038243236339415_5039961707252628872_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeGTYV23ZJEr0jzu-1_Ww76JGiVu-W6drKEaJW75bp2soWRMSRXJhz4EpaSCPVA5PN455N0-CWdG60R3N3tdxo0E&_nc_ohc=re_UyfiTR_wAX8uAzGD&_nc_ht=scontent.fmnl3-1.fna&oh=e91cbce2c8c77a67b04b3065ab2392e2&oe=61B3EA92",
+        "https://firebasestorage.googleapis.com/v0/b/midterm-4th-year.appspot.com/o/tin.jpg?alt=media&token=fffc9653-277c-45e2-a6b3-f8d3e6ca877d",
       comments: [
         {
           id: 1,
@@ -412,7 +412,7 @@ const initialState = {
       persuasionTwo: 0,
       persuasionOne: 0,
       image:
-        "https://scontent.fmnl3-4.fna.fbcdn.net/v/t39.30808-6/250903083_5019590318070870_7531887545027203388_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeF0mJIziL0VR8c88f-c8eQhiFtPIw9wt6aIW08jD3C3pqEpVr1CZ7Y4uzXPVyA-2RRBkhsiHOZDTZeVmz5cz0ko&_nc_ohc=0krp7_Zc-GYAX8XPYeT&tn=kNm8z-uMDh7dLY-7&_nc_ht=scontent.fmnl3-4.fna&oh=e1d529ff4f5e61c9657a2c50503af432&oe=61B37F6D",
+        "https://firebasestorage.googleapis.com/v0/b/midterm-4th-year.appspot.com/o/mem.jpg?alt=media&token=fe977d57-e8cb-4441-bc7b-dd27c58dfb2a",
       comments: [
         {
           id: 1,

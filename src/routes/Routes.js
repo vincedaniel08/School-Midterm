@@ -9,7 +9,7 @@ import {
 
 import Index from "../pages/Index";
 import StudentEvaluation from "../components/StudentEvaluation";
-
+import Blog from "../components/Blog";
 
 
 export default function Routes() {
@@ -26,13 +26,9 @@ export default function Routes() {
       <Router>
         
         <Switch>
-          <Route exact path="/">
-            <Index />
-          </Route>
-          <Route path="/studentEvaluation">
-            <StudentEvaluation />
-          </Route>
-        
+          <Route exact path="/" component={Index}/>
+          <Route path="/studentEvaluation" component={StudentEvaluation}/>
+          <Route path="/blog" component={Blog}/>
         </Switch>
 
       </Router>
