@@ -117,7 +117,7 @@ export default function StudentEvaluation() {
         }
         if (state.comments.find((item) => item.commentEmail === user.email)) {
           toast.warn(
-            "Hi! " + user.displayName +   ",You can only rate once"
+            "Hi! " + user.displayName +  ",You can only rate once"
           );
           setOverAll(null);
           setOpen(false);
@@ -198,12 +198,12 @@ export default function StudentEvaluation() {
    (studentId === null ? 0: state.findStudent.teamworkOne );
 
   const teamworkRatingAverage =
-  (studentId === null ? 0 : 5 * state.findStudent.teamworkFive ) +
+  ((studentId === null ? 0 : 5 * state.findStudent.teamworkFive ) +
    (studentId === null ? 0: 4 * state.findStudent.teamworkFour ) +
    (studentId === null ? 0: 3 * state.findStudent.teamworkThree ) +
    (studentId === null ? 0: 2 * state.findStudent.teamworkTwo ) +
-   (studentId === null ? 0: 1 * state.findStudent.teamworkOne ) /
-    totalTeamWorkRating;
+   (studentId === null ? 0: 1 * state.findStudent.teamworkOne )) /
+    (totalTeamWorkRating);
 
   //creativity
   const totalCreativityRating =
@@ -214,11 +214,11 @@ export default function StudentEvaluation() {
   (studentId === null ? 0 : state.findStudent.creativityOne ) ;
 
   const creativityRatingAverage =
-  (studentId === null ? 0 : 5 * state.findStudent.creativityFive ) +
+  ((studentId === null ? 0 : 5 * state.findStudent.creativityFive ) +
   (studentId === null ? 0 : 4 * state.findStudent.creativityFour ) +
   (studentId === null ? 0 : 3 * state.findStudent.creativityThree ) +
   (studentId === null ? 0 : 2 * state.findStudent.creativityTwo ) +
-  (studentId === null ? 0 : 1 * state.findStudent.creativityOne ) /
+  (studentId === null ? 0 : 1 * state.findStudent.creativityOne )) /
     totalCreativityRating;
 
   //adaptability
@@ -230,11 +230,11 @@ export default function StudentEvaluation() {
    (studentId === null ? 0: state.findStudent.adaptabilityOne );
 
   const adaptabilityRatingAverage =
-  (studentId === null ? 0 : 5 * state.findStudent.adaptabilityFive ) +
+  ((studentId === null ? 0 : 5 * state.findStudent.adaptabilityFive ) +
   (studentId === null ? 0 : 4 * state.findStudent.adaptabilityFour ) +
   (studentId === null ? 0 : 3 * state.findStudent.adaptabilityThree ) +
   (studentId === null ? 0 : 2 * state.findStudent.adaptabilityTwo ) +
-  (studentId === null ? 0 : 1 * state.findStudent.adaptabilityOne ) /
+  (studentId === null ? 0 : 1 * state.findStudent.adaptabilityOne )) /
     totalAdaptabilityRating;
 
   //leadership
@@ -246,11 +246,11 @@ export default function StudentEvaluation() {
   (studentId === null ? 0: state.findStudent.leadershipOne );
 
   const leadershipRatingAverage =
-  (studentId === null ? 0 : 5 * state.findStudent.leadershipFive ) +
+  ((studentId === null ? 0 : 5 * state.findStudent.leadershipFive ) +
   (studentId === null ? 0 : 4 * state.findStudent.leadershipFour ) +
   (studentId === null ? 0 : 3 * state.findStudent.leadershipThree ) +
   (studentId === null ? 0 : 2 * state.findStudent.leadershipTwo ) +
-  (studentId === null ? 0 : 1 * state.findStudent.leadershipOne ) /
+  (studentId === null ? 0 : 1 * state.findStudent.leadershipOne )) /
     totalLeadershipRating;
 
   //persuasion
@@ -262,11 +262,11 @@ export default function StudentEvaluation() {
   (studentId === null ? 0: state.findStudent.persuasionOne );
 
   const persuasionRatingAverage =
-  (studentId === null ? 0 : 5 * state.findStudent.persuasionFive ) +
+  ((studentId === null ? 0 : 5 * state.findStudent.persuasionFive ) +
   (studentId === null ? 0 : 4 * state.findStudent.persuasionFour ) +
   (studentId === null ? 0 : 3 * state.findStudent.persuasionThree ) +
   (studentId === null ? 0 : 2 * state.findStudent.persuasionTwo ) +
-  (studentId === null ? 0 : 1 * state.findStudent.persuasionOne ) /
+  (studentId === null ? 0 : 1 * state.findStudent.persuasionOne )) /
     totalPersuasionRating;
 
   const totalOverallRating =
