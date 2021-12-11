@@ -16,7 +16,7 @@ import {
   Avatar,
   IconButton,
 } from "@mui/material";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 import { Helmet } from "react-helmet";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -29,7 +29,7 @@ import style from "../style/studentEvaluation";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ReportGmailerrorredOutlinedIcon from "@mui/icons-material/ReportGmailerrorredOutlined";
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
-import Header from "./Header";
+import Header from "../components/Header";
 import { useLocation } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import {
