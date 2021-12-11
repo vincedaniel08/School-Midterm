@@ -22,7 +22,7 @@ import {
 import { styled } from "@mui/material/styles";
 import { toggleTab } from "../redux/actions/uiAction";
 import style from "../style/studentList";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import usePagination from "../components/Pagination";
 
@@ -42,66 +42,60 @@ export default function StudentList() {
   const [page, setPage] = useState(1);
   const studentSort = state.students.sort(
     (a, b) =>
-   
-      ((5 * b.teamworkFive +
-      4 *  b.teamworkFour +
-      3 * b.teamworkThree +
-      2 * b.teamworkTwo +
-      1 * b.teamworkOne +
-      5 * b.creativityFive +
-      4 *  b.creativityFour +
-      3 *  b.creativityThree +
-      2 * b.creativityTwo +
-      1 * b.creativityOne +
-      5 * b.adaptabilityFive +
-      4 * b.adaptabilityFour +
-      3 * b.adaptabilityThree +
-      2 * b.adaptabilityTwo +
-      1 * b.adaptabilityOne +
-      5 * b.leadershipFive +
-      4 * b.leadershipFour +
-      3 * b.leadershipThree +
-      2 * b.leadershipTwo +
-      1 *  b.leadershipOne +
-      5 * b.leadershipFive +
-      4 * b.persuasionFour +
-      3 *  b.persuasionThree +
-      2 *  b.persuasionTwo +
-      1 *  b.persuasionOne) /  
-       (25))
-      
-       -
-     
-        ((5 *  a.teamworkFive +
-        4 *   a.teamworkFour +
-        3 *  a.teamworkThree +
-        2 *  a.teamworkTwo +
-        1 *  a.teamworkOne +
-        5 *  a.creativityFive +
-        4 *  a.creativityFour +
-        3 *  a.creativityThree +
-        2 *  a.creativityTwo +
-        1 *  a.creativityOne +
-        5 *  a.adaptabilityFive +
-        4 *   a.adaptabilityFour +
-        3 *  a.adaptabilityThree +
-        2 *  a.adaptabilityTwo +
-        1 *  a.adaptabilityOne +
-        5 *  a.leadershipFive +
-        4 *  a.leadershipFour +
-        3 *  a.leadershipThree +
-        2 *  a.leadershipTwo +
-        1 *  a.leadershipOne +
-        5 *  a.leadershipFive +
-        4 *  a.persuasionFour +
-        3 *  a.persuasionThree +
-        2 *  a.persuasionTwo +
-        1 *  a.persuasionOne ) /  
-        (25 ))
-      
+      (5 * b.teamworkFive +
+        4 * b.teamworkFour +
+        3 * b.teamworkThree +
+        2 * b.teamworkTwo +
+        1 * b.teamworkOne +
+        5 * b.creativityFive +
+        4 * b.creativityFour +
+        3 * b.creativityThree +
+        2 * b.creativityTwo +
+        1 * b.creativityOne +
+        5 * b.adaptabilityFive +
+        4 * b.adaptabilityFour +
+        3 * b.adaptabilityThree +
+        2 * b.adaptabilityTwo +
+        1 * b.adaptabilityOne +
+        5 * b.leadershipFive +
+        4 * b.leadershipFour +
+        3 * b.leadershipThree +
+        2 * b.leadershipTwo +
+        1 * b.leadershipOne +
+        5 * b.leadershipFive +
+        4 * b.persuasionFour +
+        3 * b.persuasionThree +
+        2 * b.persuasionTwo +
+        1 * b.persuasionOne) /
+        25 -
+      (5 * a.teamworkFive +
+        4 * a.teamworkFour +
+        3 * a.teamworkThree +
+        2 * a.teamworkTwo +
+        1 * a.teamworkOne +
+        5 * a.creativityFive +
+        4 * a.creativityFour +
+        3 * a.creativityThree +
+        2 * a.creativityTwo +
+        1 * a.creativityOne +
+        5 * a.adaptabilityFive +
+        4 * a.adaptabilityFour +
+        3 * a.adaptabilityThree +
+        2 * a.adaptabilityTwo +
+        1 * a.adaptabilityOne +
+        5 * a.leadershipFive +
+        4 * a.leadershipFour +
+        3 * a.leadershipThree +
+        2 * a.leadershipTwo +
+        1 * a.leadershipOne +
+        5 * a.leadershipFive +
+        4 * a.persuasionFour +
+        3 * a.persuasionThree +
+        2 * a.persuasionTwo +
+        1 * a.persuasionOne) /
+        25
   );
 
- 
   const PER_PAGE = 5;
   const _DATA = usePagination(state.students, PER_PAGE);
 
@@ -121,7 +115,6 @@ export default function StudentList() {
     dispatch(toggleTab(2));
     history.push(`/studentevaluation?student=${id}`);
   };
-
 
   return (
     <Box sx={style.boxcon}>
@@ -205,36 +198,90 @@ export default function StudentList() {
                                 4 * student.persuasionFour +
                                 3 * student.persuasionThree +
                                 2 * student.persuasionTwo +
-                                1 * student.persuasionOne  ) /
-                                ( student.teamworkFive +
-                                   student.teamworkFour +
-                                  student.teamworkThree +
-                                   student.teamworkTwo +
-                                   student.teamworkOne +
-                                   student.creativityFive +
-                                   student.creativityFour +
-                                   student.creativityThree +
-                                   student.creativityTwo +
-                                  student.creativityOne +
-                                   student.adaptabilityFive +
-                                   student.adaptabilityFour +
-                                   student.adaptabilityThree +
-                                   student.adaptabilityTwo +
-                                   student.adaptabilityOne +
-                                   student.leadershipFive +
-                                   student.leadershipFour +
-                                   student.leadershipThree +
-                                   student.leadershipTwo +
-                                   student.leadershipOne +
-                                   student.persuasionFive +
-                                   student.persuasionFour +
-                                   student.persuasionThree +
-                                   student.persuasionTwo +
-                                   student.persuasionOne  )
+                                1 * student.persuasionOne) /
+                              (student.teamworkFive +
+                                student.teamworkFour +
+                                student.teamworkThree +
+                                student.teamworkTwo +
+                                student.teamworkOne +
+                                student.creativityFive +
+                                student.creativityFour +
+                                student.creativityThree +
+                                student.creativityTwo +
+                                student.creativityOne +
+                                student.adaptabilityFive +
+                                student.adaptabilityFour +
+                                student.adaptabilityThree +
+                                student.adaptabilityTwo +
+                                student.adaptabilityOne +
+                                student.leadershipFive +
+                                student.leadershipFour +
+                                student.leadershipThree +
+                                student.leadershipTwo +
+                                student.leadershipOne +
+                                student.persuasionFive +
+                                student.persuasionFour +
+                                student.persuasionThree +
+                                student.persuasionTwo +
+                                student.persuasionOne)
                             }
                             readOnly
                             precision={0.5}
-                            sx={style.rating}
+                            sx={
+                              (5 * student.teamworkFive +
+                                4 * student.teamworkFour +
+                                3 * student.teamworkThree +
+                                2 * student.teamworkTwo +
+                                1 * student.teamworkOne +
+                                5 * student.creativityFive +
+                                4 * student.creativityFour +
+                                3 * student.creativityThree +
+                                2 * student.creativityTwo +
+                                1 * student.creativityOne +
+                                5 * student.adaptabilityFive +
+                                4 * student.adaptabilityFour +
+                                3 * student.adaptabilityThree +
+                                2 * student.adaptabilityTwo +
+                                1 * student.adaptabilityOne +
+                                5 * student.leadershipFive +
+                                4 * student.leadershipFour +
+                                3 * student.leadershipThree +
+                                2 * student.leadershipTwo +
+                                1 * student.leadershipOne +
+                                5 * student.persuasionFive +
+                                4 * student.persuasionFour +
+                                3 * student.persuasionThree +
+                                2 * student.persuasionTwo +
+                                1 * student.persuasionOne) /
+                                (student.teamworkFive +
+                                  student.teamworkFour +
+                                  student.teamworkThree +
+                                  student.teamworkTwo +
+                                  student.teamworkOne +
+                                  student.creativityFive +
+                                  student.creativityFour +
+                                  student.creativityThree +
+                                  student.creativityTwo +
+                                  student.creativityOne +
+                                  student.adaptabilityFive +
+                                  student.adaptabilityFour +
+                                  student.adaptabilityThree +
+                                  student.adaptabilityTwo +
+                                  student.adaptabilityOne +
+                                  student.leadershipFive +
+                                  student.leadershipFour +
+                                  student.leadershipThree +
+                                  student.leadershipTwo +
+                                  student.leadershipOne +
+                                  student.persuasionFive +
+                                  student.persuasionFour +
+                                  student.persuasionThree +
+                                  student.persuasionTwo +
+                                  student.persuasionOne) >
+                              2
+                                ? style.rating
+                                : style.ratingRed
+                            }
                             emptyIcon={
                               <StarIcon
                                 style={{
@@ -354,7 +401,7 @@ export default function StudentList() {
                 }}
               />
             </ListItem>
-            
+
             {_DATA.currentData().map((student, index) => {
               return (
                 <Paper
@@ -420,36 +467,90 @@ export default function StudentList() {
                           4 * student.persuasionFour +
                           3 * student.persuasionThree +
                           2 * student.persuasionTwo +
-                          1 * student.persuasionOne  ) /
-                          ( student.teamworkFive +
-                             student.teamworkFour +
-                            student.teamworkThree +
-                             student.teamworkTwo +
-                             student.teamworkOne +
-                             student.creativityFive +
-                             student.creativityFour +
-                             student.creativityThree +
-                             student.creativityTwo +
-                            student.creativityOne +
-                             student.adaptabilityFive +
-                             student.adaptabilityFour +
-                             student.adaptabilityThree +
-                             student.adaptabilityTwo +
-                             student.adaptabilityOne +
-                             student.leadershipFive +
-                             student.leadershipFour +
-                             student.leadershipThree +
-                             student.leadershipTwo +
-                             student.leadershipOne +
-                             student.persuasionFive +
-                             student.persuasionFour +
-                             student.persuasionThree +
-                             student.persuasionTwo +
-                             student.persuasionOne  )
+                          1 * student.persuasionOne) /
+                        (student.teamworkFive +
+                          student.teamworkFour +
+                          student.teamworkThree +
+                          student.teamworkTwo +
+                          student.teamworkOne +
+                          student.creativityFive +
+                          student.creativityFour +
+                          student.creativityThree +
+                          student.creativityTwo +
+                          student.creativityOne +
+                          student.adaptabilityFive +
+                          student.adaptabilityFour +
+                          student.adaptabilityThree +
+                          student.adaptabilityTwo +
+                          student.adaptabilityOne +
+                          student.leadershipFive +
+                          student.leadershipFour +
+                          student.leadershipThree +
+                          student.leadershipTwo +
+                          student.leadershipOne +
+                          student.persuasionFive +
+                          student.persuasionFour +
+                          student.persuasionThree +
+                          student.persuasionTwo +
+                          student.persuasionOne)
                       }
                       readOnly
                       precision={0.5}
-                      sx={style.rating}
+                      sx={
+                        (5 * student.teamworkFive +
+                          4 * student.teamworkFour +
+                          3 * student.teamworkThree +
+                          2 * student.teamworkTwo +
+                          1 * student.teamworkOne +
+                          5 * student.creativityFive +
+                          4 * student.creativityFour +
+                          3 * student.creativityThree +
+                          2 * student.creativityTwo +
+                          1 * student.creativityOne +
+                          5 * student.adaptabilityFive +
+                          4 * student.adaptabilityFour +
+                          3 * student.adaptabilityThree +
+                          2 * student.adaptabilityTwo +
+                          1 * student.adaptabilityOne +
+                          5 * student.leadershipFive +
+                          4 * student.leadershipFour +
+                          3 * student.leadershipThree +
+                          2 * student.leadershipTwo +
+                          1 * student.leadershipOne +
+                          5 * student.persuasionFive +
+                          4 * student.persuasionFour +
+                          3 * student.persuasionThree +
+                          2 * student.persuasionTwo +
+                          1 * student.persuasionOne) /
+                          (student.teamworkFive +
+                            student.teamworkFour +
+                            student.teamworkThree +
+                            student.teamworkTwo +
+                            student.teamworkOne +
+                            student.creativityFive +
+                            student.creativityFour +
+                            student.creativityThree +
+                            student.creativityTwo +
+                            student.creativityOne +
+                            student.adaptabilityFive +
+                            student.adaptabilityFour +
+                            student.adaptabilityThree +
+                            student.adaptabilityTwo +
+                            student.adaptabilityOne +
+                            student.leadershipFive +
+                            student.leadershipFour +
+                            student.leadershipThree +
+                            student.leadershipTwo +
+                            student.leadershipOne +
+                            student.persuasionFive +
+                            student.persuasionFour +
+                            student.persuasionThree +
+                            student.persuasionTwo +
+                            student.persuasionOne) >
+                        2
+                          ? style.rating
+                          : style.ratingRed
+                      }
                       emptyIcon={
                         <StarIcon
                           style={{ opacity: 0.55 }}

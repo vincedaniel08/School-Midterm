@@ -111,6 +111,15 @@ const style = {
     mr: 2,
     color: '#26CE8D',
   },
+  ratingRed: {
+    fontSize: {
+      xs: 10,
+      sm: 15,
+      md: 20
+    },
+    mr: 2,
+    color: '#FF0000',
+  },
 
   cardname: {
     fontSize: '14px',

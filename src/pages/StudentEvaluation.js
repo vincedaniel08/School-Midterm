@@ -333,7 +333,11 @@ export default function StudentEvaluation() {
                   <Rating
                     value={overallRatingAverage.toFixed(1)}
                     readOnly
-                    sx={style.rating}
+                    sx={
+                      overallRatingAverage > 2
+                        ? style.rating
+                        : style.ratingRed
+                    }
                     precision={0.5}
                     emptyIcon={
                       <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
