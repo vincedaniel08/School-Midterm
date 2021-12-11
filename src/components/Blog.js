@@ -1,10 +1,11 @@
+import { Box, Typography } from '@mui/material'
 import React from 'react'
 import Header from './Header'
 export default function Blog() {
     return (
-        <div>
+        <Box>
             <Header/>
-            Blog
-        </div>
+            <Typography variant="h1" sx={{color:"white", textAlign:"center", mt:10}}>Blog</Typography>
+        </Box>
     )
 }

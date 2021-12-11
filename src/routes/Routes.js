@@ -10,7 +10,7 @@ import {
 import Index from "../pages/Index";
 import StudentEvaluation from "../components/StudentEvaluation";
 import Blog from "../components/Blog";
-
+import NotFound from "../components/404";
 
 export default function Routes() {
 
@@ -29,6 +29,7 @@ export default function Routes() {
           <Route exact path="/" component={Index}/>
           <Route path="/studentEvaluation" component={StudentEvaluation}/>
           <Route path="/blog" component={Blog}/>
+          <Route  component={NotFound}/>
         </Switch>
 
       </Router>
