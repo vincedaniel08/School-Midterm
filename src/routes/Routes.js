@@ -32,6 +32,7 @@ export default function Routes() {
             <StudentEvaluation/>
           </Route>
           <Route path="/blog" >
+          <Blog/>
           </Route>
           <Route  component={NotFound}>
             <NotFound/>
