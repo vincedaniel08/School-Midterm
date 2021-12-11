@@ -11,6 +11,7 @@ import Index from "../pages/Index";
 import StudentEvaluation from "../pages/StudentEvaluation";
 import Blog from "../components/Blog";
 import NotFound from "../components/404";
+
 export default function Routes() {
 
 
@@ -25,18 +26,10 @@ export default function Routes() {
       <Router>
         
         <Switch>
-          <Route exact path="/" > 
-          <Index/>
-          </Route>
-          <Route path="/studentevaluation" >
-            <StudentEvaluation/>
-          </Route>
-          <Route path="/blog" >
-          <Blog/>
-          </Route>
-          <Route >
-            <NotFound/>
-          </Route>
+          <Route exact path="/" component={Index}/>
+          <Route path="/studentEvaluation" component={StudentEvaluation}/>
+          <Route path="/blog" component={Blog}/>
+          <Route component={NotFound}/>
         </Switch>
 
       </Router>
