@@ -28,10 +28,10 @@ export default function Routes() {
           <Route exact path="/" > 
           <Index/>
           </Route>
-          <Route path="/studentevaluation" component={StudentEvaluation}>
+          <Route path="/studentevaluation" >
             <StudentEvaluation/>
           </Route>
-          <Route path="/blog" component={Blog}>
+          <Route path="/blog" >
           </Route>
           <Route  component={NotFound}>
             <NotFound/>
