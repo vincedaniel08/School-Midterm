@@ -5,7 +5,11 @@ const initialState = {
   counter: null,
   error: null,
   profile: false,
-  findStudent: [],
+  findStudent: [
+    {
+      teamworkFive:5
+    }
+  ],
   subComments: [],
   students: [
     {
@@ -500,1487 +504,1590 @@ function userReducer(state = initialState, action) {
       return {
         ...state,
         subComments: state.subComments.filter(
-          (item) =>
-            item.studentName === action.payload 
-         //  && item.commentEmail === action.payload.commentEmail
+          (item) => item.studentName === action.payload
+          //  && item.commentEmail === action.payload.commentEmail
         ),
       };
     case actionTypes.FIND_STUDENT:
       return {
         ...state,
+
         findStudent: state.students.find(
-          (item) => item.studentName === action.payload
+          (item) =>
+            item.studentName === action.payload 
         ),
+      
       };
     case actionTypes.ADD_COMMENT:
       return {
         ...state,
-     
+
         comments: state.comments.concat(action.payload),
-        students: state.students.map((content, i) =>
-          content.studentName === action.payload.studentName &&
-          action.payload.teamworkRating === 5 &&
-          action.payload.creativityRating === 5 &&
-          action.payload.adaptabilityRating === 5 &&
-          action.payload.leadershipRating === 5 &&
-          action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName &&  action.payload.teamworkRating === 4  &&
-              action.payload.creativityRating === 4 &&
-              action.payload.adaptabilityRating === 4 &&
-              action.payload.leadershipRating === 4 &&
-              action.payload.persuasionRating === 4
-            ? {
-                ...content,
-                teamworkFour: content.teamworkFour + 1,
-                creativityFour: content.creativityFour + 1,
-                adaptabilityFour: content.adaptabilityFour + 1,
-                leadershipFour: content.leadershipFour + 1,
-                persuasionFour: content.persuasionFour + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 3 &&
-              action.payload.creativityRating === 3 &&
-              action.payload.adaptabilityRating === 3 &&
-              action.payload.leadershipRating === 3 &&
-              action.payload.persuasionRating === 3
-            ? {
-                ...content,
-                teamworkThree: content.teamworkThree + 1,
-                creativityThree: content.creativityThree + 1,
-                adaptabilityThree: content.adaptabilityThree + 1,
-                leadershipThree: content.leadershipThree + 1,
-                persuasionThree: content.persuasionThree + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 2 &&
-              action.payload.creativityRating === 2 &&
-              action.payload.adaptabilityRating === 2 &&
-              action.payload.leadershipRating === 2 &&
-              action.payload.persuasionRating === 2
-            ? {
-                ...content,
-                teamworkTwo: content.teamworkTwo + 1,
-                creativityTwo: content.creativityTwo + 1,
-                adaptabilityTwo: content.adaptabilityTwo + 1,
-                leadershipTwo: content.leadershipTwo + 1,
-                persuasionTwo: content.persuasionTwo + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :  content.studentName === action.payload.studentName &&action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 1 &&
-              action.payload.persuasionRating === 1
-              
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipOne: content.leadershipOne + 1,
-                persuasionOne: content.persuasionOne + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :  content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :  content.studentName === action.payload.studentName && action.payload.teamworkRating === 2 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkTwo: content.teamworkTwo + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :  content.studentName === action.payload.studentName && action.payload.teamworkRating === 3 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkThree: content.teamworkThree + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :  content.studentName === action.payload.studentName && action.payload.teamworkRating === 4 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFour: content.teamworkFour + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :  content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :   content.studentName === action.payload.studentName &&action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 2 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityTwo: content.creativityTwo + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :  content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 3 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityThree: content.creativityThree + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :  content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 4 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFour: content.creativityFour + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :  content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :  content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 2 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityTwo: content.adaptabilityTwo + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 3 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityThree: content.adaptabilityThree + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 4 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFour: content.adaptabilityFour + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 1 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipOne: content.leadershipOne + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 2 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipTwo: content.leadershipTwo + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 3 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipThree: content.leadershipThree + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 4 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFour: content.leadershipFour + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 1
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionOne: content.persuasionOne + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 2
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionTwo: content.persuasionTwo + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 3
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionThree: content.persuasionThree + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 4
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFour: content.persuasionFour + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 2 &&
-              action.payload.creativityRating === 2 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkTwo: content.teamworkTwo + 1,
-                creativityTwo: content.creativityTwo + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 3 &&
-              action.payload.creativityRating === 3 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkThree: content.teamworkThree + 1,
-                creativityThree: content.creativityThree + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 4 &&
-              action.payload.creativityRating === 4 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFour: content.teamworkFour + 1,
-                creativityFour: content.creativityFour + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 2 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 2 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkTwo: content.teamworkTwo + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityTwo: content.adaptabilityTwo + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 3 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 3 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkThree: content.teamworkThree + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityThree: content.adaptabilityThree + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 4 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 4 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFour: content.teamworkTwo + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFour: content.adaptabilityTwo + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 1 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipOne: content.leadershipOne + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 2 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 2 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkTwo: content.teamworkTwo + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipTwo: content.leadershipTwo + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 3 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 3 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkThree: content.teamworkThree + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipThree: content.leadershipThree + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 4 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 4 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFour: content.teamworkFour + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFour: content.leadershipFour + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 1
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionOne: content.persuasionOne + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 2 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 2
-            ? {
-                ...content,
-                teamworkTwo: content.teamworkTwo + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionTwo: content.persuasionTwo + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 3 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 3
-            ? {
-                ...content,
-                teamworkThree: content.teamworkThree + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionThree: content.persuasionThree + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 4 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 4
-            ? {
-                ...content,
-                teamworkFour: content.teamworkFour + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFour: content.persuasionFour + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 2 &&
-              action.payload.adaptabilityRating === 2 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityTwo: content.creativityTwo + 1,
-                adaptabilityTwo: content.adaptabilityTwo + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 3 &&
-              action.payload.adaptabilityRating === 3 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityThree: content.creativityThree + 1,
-                adaptabilityThree: content.adaptabilityThree + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 4 &&
-              action.payload.adaptabilityRating === 4 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFour: content.creativityFour + 1,
-                adaptabilityFour: content.adaptabilityFour + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 1 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipOne: content.leadershipOne + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 2 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 2 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityTwo: content.creativityTwo + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipTwo: content.leadershipTwo + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 3 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 3 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityThree: content.creativityThree + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipThree: content.leadershipThree + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 4 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 4 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFour: content.creativityFour + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFour: content.leadershipFour + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 1
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionOne: content.persuasionOne + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 2 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 2
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityTwo: content.creativityTwo + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionTwo: content.persuasionTwo + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :  content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 3 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 3
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityThree: content.creativityThree + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionThree: content.persuasionThree + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 4 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 4
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFour: content.creativityFour + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFour: content.persuasionFour + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 1 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipOne: content.leadershipOne + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 2 &&
-              action.payload.leadershipRating === 2 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityTwo: content.adaptabilityTwo + 1,
-                leadershipTwo: content.leadershipTwo + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 3 &&
-              action.payload.leadershipRating === 3 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityThree: content.adaptabilityThree + 1,
-                leadershipThree: content.leadershipThree + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 4 &&
-              action.payload.leadershipRating === 4 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFour: content.adaptabilityFour + 1,
-                leadershipFour: content.leadershipFour + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 1
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionOne: content.persuasionOne + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 2 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 2
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityTwo: content.adaptabilityTwo + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionTwo: content.persuasionTwo + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 3 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 3
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityThree: content.adaptabilityThree + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionThree: content.persuasionThree + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 4 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 4
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFour: content.adaptabilityFour + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFour: content.persuasionFour + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 1 &&
-              action.payload.persuasionRating === 1
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipOne: content.leadershipOne + 1,
-                persuasionOne: content.persuasionOne + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 2 &&
-              action.payload.persuasionRating === 2
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipTwo: content.leadershipTwo + 1,
-                persuasionTwo: content.persuasionTwo + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 3 &&
-              action.payload.persuasionRating === 3
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipThree: content.leadershipThree + 1,
-                persuasionThree: content.persuasionThree + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 4 &&
-              action.payload.persuasionRating === 4
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFour: content.leadershipFour + 1,
-                persuasionFour: content.persuasionFour + 1,
-                studentReview: content.studentReview + 1,
-              }
-            : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 2 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityTwo: content.creativityTwo + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 3 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityThree: content.creativityThree + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 4 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFour: content.creativityFour + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 2 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityTwo: content.adaptabilityTwo + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 3 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityThree: content.adaptabilityThree + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 4 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFour: content.adaptabilityFour + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 2 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipTwo: content.leadershipTwo + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 3 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipThree: content.leadershipThree + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 4 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFour: content.leadershipFour + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              :  content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 2
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionTwo: content.persuasionTwo + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 3
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionThree: content.persuasionThree + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 1 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 4
-            ? {
-                ...content,
-                teamworkOne: content.teamworkOne + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFour: content.persuasionFour + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 2 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityTwo: content.adaptabilityTwo + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 3 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityThree: content.adaptabilityThree + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 4 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFour: content.adaptabilityFour + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 2 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipTwo: content.leadershipTwo + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 3 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipThree: content.leadershipThree + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 4 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFour: content.leadershipFour + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 2
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionTwo: content.persuasionTwo + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 3
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionThree: content.persuasionThree + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 4
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFour: content.persuasionFour + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 2 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipTwo: content.leadershipTwo + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 3 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipThree: content.leadershipThree + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 4 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipFour: content.leadershipFour + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 2
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionTwo: content.persuasionTwo + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 3
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionThree: content.persuasionThree + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 1 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 4
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityOne: content.adaptabilityOne + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFour: content.persuasionFour + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 1 &&
-              action.payload.persuasionRating === 2
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipOne: content.leadershipOne + 1,
-                persuasionTwo: content.persuasionTwo + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 1 &&
-              action.payload.persuasionRating === 3
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipOne: content.leadershipOne + 1,
-                persuasionThree: content.persuasionThree + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 5 &&
-              action.payload.creativityRating === 5 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 1 &&
-              action.payload.persuasionRating === 4
-            ? {
-                ...content,
-                teamworkFive: content.teamworkFive + 1,
-                creativityFive: content.creativityFive + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipOne: content.leadershipOne + 1,
-                persuasionFour: content.persuasionFour + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 2 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkTwo: content.teamworkTwo + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName &&action.payload.teamworkRating === 2 &&
-              action.payload.creativityRating === 3 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkTwo: content.teamworkTwo + 1,
-                creativityThree: content.creativityThree + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 2 &&
-              action.payload.creativityRating === 4 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkTwo: content.teamworkTwo + 1,
-                creativityFour: content.creativityFour + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 3 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkThree: content.teamworkThree + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 3 &&
-              action.payload.creativityRating === 2 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkThree: content.teamworkThree + 1,
-                creativityTwo: content.creativityTwo + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 3 &&
-              action.payload.creativityRating === 4 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkThree: content.teamworkThree + 1,
-                creativityFour: content.creativityFour + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 4 &&
-              action.payload.creativityRating === 1 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFour: content.teamworkFour + 1,
-                creativityOne: content.creativityOne + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 4 &&
-              action.payload.creativityRating === 2 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFour: content.teamworkFour + 1,
-                creativityTwo: content.creativityTwo + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-              : content.studentName === action.payload.studentName && action.payload.teamworkRating === 4 &&
-              action.payload.creativityRating === 3 &&
-              action.payload.adaptabilityRating === 5 &&
-              action.payload.leadershipRating === 5 &&
-              action.payload.persuasionRating === 5
-            ? {
-                ...content,
-                teamworkFour: content.teamworkFour + 1,
-                creativityThree: content.creativityThree + 1,
-                adaptabilityFive: content.adaptabilityFive + 1,
-                leadershipFive: content.leadershipFive + 1,
-                persuasionFive: content.persuasionFive + 1,
-                studentReview: content.studentReview + 1,
-              }
-            :content
-              
-            
-            
-            //may kulang pa sa pag validate ng rate , next to do creativity 2 test 1 adapatability
+        students: state.students.map(
+          (content, i) =>
+            content.studentName === action.payload.studentName &&
+            action.payload.teamworkRating === 5 &&
+            action.payload.creativityRating === 5 &&
+            action.payload.adaptabilityRating === 5 &&
+            action.payload.leadershipRating === 5 &&
+            action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 4 &&
+                action.payload.creativityRating === 4 &&
+                action.payload.adaptabilityRating === 4 &&
+                action.payload.leadershipRating === 4 &&
+                action.payload.persuasionRating === 4
+              ? {
+                  ...content,
+                  teamworkFour: content.teamworkFour + 1,
+                  creativityFour: content.creativityFour + 1,
+                  adaptabilityFour: content.adaptabilityFour + 1,
+                  leadershipFour: content.leadershipFour + 1,
+                  persuasionFour: content.persuasionFour + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 3 &&
+                action.payload.creativityRating === 3 &&
+                action.payload.adaptabilityRating === 3 &&
+                action.payload.leadershipRating === 3 &&
+                action.payload.persuasionRating === 3
+              ? {
+                  ...content,
+                  teamworkThree: content.teamworkThree + 1,
+                  creativityThree: content.creativityThree + 1,
+                  adaptabilityThree: content.adaptabilityThree + 1,
+                  leadershipThree: content.leadershipThree + 1,
+                  persuasionThree: content.persuasionThree + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 2 &&
+                action.payload.creativityRating === 2 &&
+                action.payload.adaptabilityRating === 2 &&
+                action.payload.leadershipRating === 2 &&
+                action.payload.persuasionRating === 2
+              ? {
+                  ...content,
+                  teamworkTwo: content.teamworkTwo + 1,
+                  creativityTwo: content.creativityTwo + 1,
+                  adaptabilityTwo: content.adaptabilityTwo + 1,
+                  leadershipTwo: content.leadershipTwo + 1,
+                  persuasionTwo: content.persuasionTwo + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 1 &&
+                action.payload.persuasionRating === 1
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipOne: content.leadershipOne + 1,
+                  persuasionOne: content.persuasionOne + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 2 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkTwo: content.teamworkTwo + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 3 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkThree: content.teamworkThree + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 4 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFour: content.teamworkFour + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 2 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityTwo: content.creativityTwo + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 3 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityThree: content.creativityThree + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 4 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFour: content.creativityFour + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 2 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityTwo: content.adaptabilityTwo + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 3 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityThree: content.adaptabilityThree + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 4 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFour: content.adaptabilityFour + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 1 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipOne: content.leadershipOne + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 2 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipTwo: content.leadershipTwo + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 3 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipThree: content.leadershipThree + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 4 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFour: content.leadershipFour + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 1
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionOne: content.persuasionOne + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 2
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionTwo: content.persuasionTwo + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 3
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionThree: content.persuasionThree + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 4
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFour: content.persuasionFour + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 2 &&
+                action.payload.creativityRating === 2 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkTwo: content.teamworkTwo + 1,
+                  creativityTwo: content.creativityTwo + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 3 &&
+                action.payload.creativityRating === 3 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkThree: content.teamworkThree + 1,
+                  creativityThree: content.creativityThree + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 4 &&
+                action.payload.creativityRating === 4 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFour: content.teamworkFour + 1,
+                  creativityFour: content.creativityFour + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 2 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 2 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkTwo: content.teamworkTwo + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityTwo: content.adaptabilityTwo + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 3 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 3 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkThree: content.teamworkThree + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityThree: content.adaptabilityThree + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 4 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 4 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFour: content.teamworkTwo + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFour: content.adaptabilityTwo + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 1 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipOne: content.leadershipOne + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 2 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 2 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkTwo: content.teamworkTwo + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipTwo: content.leadershipTwo + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 3 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 3 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkThree: content.teamworkThree + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipThree: content.leadershipThree + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 4 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 4 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFour: content.teamworkFour + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFour: content.leadershipFour + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 1
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionOne: content.persuasionOne + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 2 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 2
+              ? {
+                  ...content,
+                  teamworkTwo: content.teamworkTwo + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionTwo: content.persuasionTwo + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 3 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 3
+              ? {
+                  ...content,
+                  teamworkThree: content.teamworkThree + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionThree: content.persuasionThree + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 4 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 4
+              ? {
+                  ...content,
+                  teamworkFour: content.teamworkFour + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFour: content.persuasionFour + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 2 &&
+                action.payload.adaptabilityRating === 2 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityTwo: content.creativityTwo + 1,
+                  adaptabilityTwo: content.adaptabilityTwo + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 3 &&
+                action.payload.adaptabilityRating === 3 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityThree: content.creativityThree + 1,
+                  adaptabilityThree: content.adaptabilityThree + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 4 &&
+                action.payload.adaptabilityRating === 4 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFour: content.creativityFour + 1,
+                  adaptabilityFour: content.adaptabilityFour + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 1 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipOne: content.leadershipOne + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 2 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 2 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityTwo: content.creativityTwo + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipTwo: content.leadershipTwo + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 3 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 3 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityThree: content.creativityThree + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipThree: content.leadershipThree + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 4 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 4 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFour: content.creativityFour + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFour: content.leadershipFour + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 1
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionOne: content.persuasionOne + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 2 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 2
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityTwo: content.creativityTwo + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionTwo: content.persuasionTwo + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 3 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 3
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityThree: content.creativityThree + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionThree: content.persuasionThree + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 4 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 4
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFour: content.creativityFour + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFour: content.persuasionFour + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 1 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipOne: content.leadershipOne + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 2 &&
+                action.payload.leadershipRating === 2 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityTwo: content.adaptabilityTwo + 1,
+                  leadershipTwo: content.leadershipTwo + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 3 &&
+                action.payload.leadershipRating === 3 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityThree: content.adaptabilityThree + 1,
+                  leadershipThree: content.leadershipThree + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 4 &&
+                action.payload.leadershipRating === 4 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFour: content.adaptabilityFour + 1,
+                  leadershipFour: content.leadershipFour + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 1
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionOne: content.persuasionOne + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 2 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 2
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityTwo: content.adaptabilityTwo + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionTwo: content.persuasionTwo + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 3 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 3
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityThree: content.adaptabilityThree + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionThree: content.persuasionThree + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 4 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 4
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFour: content.adaptabilityFour + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFour: content.persuasionFour + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 1 &&
+                action.payload.persuasionRating === 1
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipOne: content.leadershipOne + 1,
+                  persuasionOne: content.persuasionOne + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 2 &&
+                action.payload.persuasionRating === 2
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipTwo: content.leadershipTwo + 1,
+                  persuasionTwo: content.persuasionTwo + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 3 &&
+                action.payload.persuasionRating === 3
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipThree: content.leadershipThree + 1,
+                  persuasionThree: content.persuasionThree + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 4 &&
+                action.payload.persuasionRating === 4
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFour: content.leadershipFour + 1,
+                  persuasionFour: content.persuasionFour + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 2 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityTwo: content.creativityTwo + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 3 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityThree: content.creativityThree + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 4 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFour: content.creativityFour + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 2 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityTwo: content.adaptabilityTwo + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 3 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityThree: content.adaptabilityThree + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 4 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFour: content.adaptabilityFour + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 2 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipTwo: content.leadershipTwo + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 3 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipThree: content.leadershipThree + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 4 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFour: content.leadershipFour + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 2
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionTwo: content.persuasionTwo + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 3
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionThree: content.persuasionThree + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 1 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 4
+              ? {
+                  ...content,
+                  teamworkOne: content.teamworkOne + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFour: content.persuasionFour + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 2 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityTwo: content.adaptabilityTwo + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 3 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityThree: content.adaptabilityThree + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 4 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFour: content.adaptabilityFour + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 2 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipTwo: content.leadershipTwo + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 3 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipThree: content.leadershipThree + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 4 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFour: content.leadershipFour + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 2
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionTwo: content.persuasionTwo + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 3
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionThree: content.persuasionThree + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 4
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFour: content.persuasionFour + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 2 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipTwo: content.leadershipTwo + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 3 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipThree: content.leadershipThree + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 4 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipFour: content.leadershipFour + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 2
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionTwo: content.persuasionTwo + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 3
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionThree: content.persuasionThree + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 1 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 4
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityOne: content.adaptabilityOne + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFour: content.persuasionFour + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 1 &&
+                action.payload.persuasionRating === 2
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipOne: content.leadershipOne + 1,
+                  persuasionTwo: content.persuasionTwo + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 1 &&
+                action.payload.persuasionRating === 3
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipOne: content.leadershipOne + 1,
+                  persuasionThree: content.persuasionThree + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 5 &&
+                action.payload.creativityRating === 5 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 1 &&
+                action.payload.persuasionRating === 4
+              ? {
+                  ...content,
+                  teamworkFive: content.teamworkFive + 1,
+                  creativityFive: content.creativityFive + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipOne: content.leadershipOne + 1,
+                  persuasionFour: content.persuasionFour + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 2 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkTwo: content.teamworkTwo + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 2 &&
+                action.payload.creativityRating === 3 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkTwo: content.teamworkTwo + 1,
+                  creativityThree: content.creativityThree + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 2 &&
+                action.payload.creativityRating === 4 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkTwo: content.teamworkTwo + 1,
+                  creativityFour: content.creativityFour + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 3 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkThree: content.teamworkThree + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 3 &&
+                action.payload.creativityRating === 2 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkThree: content.teamworkThree + 1,
+                  creativityTwo: content.creativityTwo + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 3 &&
+                action.payload.creativityRating === 4 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkThree: content.teamworkThree + 1,
+                  creativityFour: content.creativityFour + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 4 &&
+                action.payload.creativityRating === 1 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFour: content.teamworkFour + 1,
+                  creativityOne: content.creativityOne + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 4 &&
+                action.payload.creativityRating === 2 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFour: content.teamworkFour + 1,
+                  creativityTwo: content.creativityTwo + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content.studentName === action.payload.studentName &&
+                action.payload.teamworkRating === 4 &&
+                action.payload.creativityRating === 3 &&
+                action.payload.adaptabilityRating === 5 &&
+                action.payload.leadershipRating === 5 &&
+                action.payload.persuasionRating === 5
+              ? {
+                  ...content,
+                  teamworkFour: content.teamworkFour + 1,
+                  creativityThree: content.creativityThree + 1,
+                  adaptabilityFive: content.adaptabilityFive + 1,
+                  leadershipFive: content.leadershipFive + 1,
+                  persuasionFive: content.persuasionFive + 1,
+                  studentReview: content.studentReview + 1,
+                }
+              : content
+
+          //may kulang pa sa pag validate ng rate , next to do creativity 2 test 1 adapatability
         ),
       };
     case actionTypes.ADD_SUB_COMMENT:

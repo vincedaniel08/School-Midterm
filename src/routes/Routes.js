@@ -27,7 +27,7 @@ export default function Routes() {
         
         <Switch>
           <Route exact path="/" component={Index}/>
-          <Route path="/studentEvaluation" component={StudentEvaluation}/>
+          <Route path="/studentevaluation" component={StudentEvaluation}/>
           <Route path="/blog" component={Blog}/>
           <Route component={NotFound}/>
         </Switch>

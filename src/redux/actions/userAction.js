@@ -36,6 +36,7 @@ export const getSubComment = (studentName,commentEmail) => async (dispatch) => {
 
 export const findStudent = (studentName) => async (dispatch) => {
   try {
+    
     dispatch({ type: actionTypes.FIND_STUDENT, payload: studentName });
   } catch (err) {
     dispatch({ type: actionTypes.USER_ERROR, payload: err });

@@ -70,6 +70,7 @@ export default function StudentEvaluation() {
   const [commentMessage, setCommentMessage] = useState("");
   const [subCommentMessage, setSubCommentMessage] = useState("");
   const [userComment, setUserComment] = useState("");
+ 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
@@ -183,89 +184,89 @@ export default function StudentEvaluation() {
     dispatch(findStudent(studentId));
     dispatch(getComment(studentId));
     dispatch(getSubComment(studentId, userComment));
-  }, [dispatch, studentId, userComment]);
+  }, [dispatch, studentId, userComment,state.findStudent]);
 
   //rating formula
 
   //teamwork
 
   const totalTeamWorkRating =
-    state.findStudent.teamworkFive +
-    state.findStudent.teamworkFour +
-    state.findStudent.teamworkThree +
-    state.findStudent.teamworkTwo +
-    state.findStudent.teamworkOne;
+   (studentId === null ? 0 : state.findStudent.teamworkFive ) +
+   (studentId === null ? 0: state.findStudent.teamworkFour ) +
+   (studentId === null ? 0: state.findStudent.teamworkThree ) +
+   (studentId === null ? 0: state.findStudent.teamworkTwo ) +
+   (studentId === null ? 0: state.findStudent.teamworkOne );
 
   const teamworkRatingAverage =
-    (5 * state.findStudent.teamworkFive +
-      4 * state.findStudent.teamworkFour +
-      3 * state.findStudent.teamworkThree +
-      2 * state.findStudent.teamworkTwo +
-      1 * state.findStudent.teamworkOne) /
+  (studentId === null ? 0 : 5 * state.findStudent.teamworkFive ) +
+   (studentId === null ? 0: 4 * state.findStudent.teamworkFour ) +
+   (studentId === null ? 0: 3 * state.findStudent.teamworkThree ) +
+   (studentId === null ? 0: 2 * state.findStudent.teamworkTwo ) +
+   (studentId === null ? 0: 1 * state.findStudent.teamworkOne ) /
     totalTeamWorkRating;
 
   //creativity
   const totalCreativityRating =
-    state.findStudent.creativityFive +
-    state.findStudent.creativityFour +
-    state.findStudent.creativityThree +
-    state.findStudent.creativityTwo +
-    state.findStudent.creativityOne;
+  (studentId === null ? 0 : state.findStudent.creativityFive ) +
+  (studentId === null ? 0 : state.findStudent.creativityFour ) +
+  (studentId === null ? 0 : state.findStudent.creativityThree ) +
+  (studentId === null ? 0 : state.findStudent.creativityTwo ) +
+  (studentId === null ? 0 : state.findStudent.creativityOne ) ;
 
   const creativityRatingAverage =
-    (5 * state.findStudent.creativityFive +
-      4 * state.findStudent.creativityFour +
-      3 * state.findStudent.creativityThree +
-      2 * state.findStudent.creativityTwo +
-      1 * state.findStudent.creativityOne) /
+  (studentId === null ? 0 : 5 * state.findStudent.creativityFive ) +
+  (studentId === null ? 0 : 4 * state.findStudent.creativityFour ) +
+  (studentId === null ? 0 : 3 * state.findStudent.creativityThree ) +
+  (studentId === null ? 0 : 2 * state.findStudent.creativityTwo ) +
+  (studentId === null ? 0 : 1 * state.findStudent.creativityOne ) /
     totalCreativityRating;
 
   //adaptability
   const totalAdaptabilityRating =
-    state.findStudent.adaptabilityFive +
-    state.findStudent.adaptabilityFour +
-    state.findStudent.adaptabilityThree +
-    state.findStudent.adaptabilityTwo +
-    state.findStudent.adaptabilityOne;
+  (studentId === null ? 0 : state.findStudent.adaptabilityFive ) +
+   (studentId === null ? 0: state.findStudent.adaptabilityFour ) +
+   (studentId === null ? 0: state.findStudent.adaptabilityThree ) +
+   (studentId === null ? 0: state.findStudent.adaptabilityTwo ) +
+   (studentId === null ? 0: state.findStudent.adaptabilityOne );
 
   const adaptabilityRatingAverage =
-    (5 * state.findStudent.adaptabilityFive +
-      4 * state.findStudent.adaptabilityFour +
-      3 * state.findStudent.adaptabilityThree +
-      2 * state.findStudent.adaptabilityTwo +
-      1 * state.findStudent.adaptabilityOne) /
+  (studentId === null ? 0 : 5 * state.findStudent.adaptabilityFive ) +
+  (studentId === null ? 0 : 4 * state.findStudent.adaptabilityFour ) +
+  (studentId === null ? 0 : 3 * state.findStudent.adaptabilityThree ) +
+  (studentId === null ? 0 : 2 * state.findStudent.adaptabilityTwo ) +
+  (studentId === null ? 0 : 1 * state.findStudent.adaptabilityOne ) /
     totalAdaptabilityRating;
 
   //leadership
   const totalLeadershipRating =
-    state.findStudent.leadershipFive +
-    state.findStudent.leadershipFour +
-    state.findStudent.leadershipThree +
-    state.findStudent.leadershipTwo +
-    state.findStudent.leadershipOne;
+  (studentId === null ? 0 : state.findStudent.leadershipFive ) +
+  (studentId === null ? 0: state.findStudent.leadershipFour ) +
+  (studentId === null ? 0: state.findStudent.leadershipThree ) +
+  (studentId === null ? 0: state.findStudent.leadershipTwo ) +
+  (studentId === null ? 0: state.findStudent.leadershipOne );
 
   const leadershipRatingAverage =
-    (5 * state.findStudent.leadershipFive +
-      4 * state.findStudent.leadershipFour +
-      3 * state.findStudent.leadershipThree +
-      2 * state.findStudent.leadershipTwo +
-      1 * state.findStudent.leadershipOne) /
+  (studentId === null ? 0 : 5 * state.findStudent.leadershipFive ) +
+  (studentId === null ? 0 : 4 * state.findStudent.leadershipFour ) +
+  (studentId === null ? 0 : 3 * state.findStudent.leadershipThree ) +
+  (studentId === null ? 0 : 2 * state.findStudent.leadershipTwo ) +
+  (studentId === null ? 0 : 1 * state.findStudent.leadershipOne ) /
     totalLeadershipRating;
 
   //persuasion
   const totalPersuasionRating =
-    state.findStudent.persuasionFive +
-    state.findStudent.persuasionFour +
-    state.findStudent.persuasionThree +
-    state.findStudent.persuasionTwo +
-    state.findStudent.persuasionOne;
+  (studentId === null ? 0 : state.findStudent.persuasiveFive ) +
+  (studentId === null ? 0: state.findStudent.persuasiveFour ) +
+  (studentId === null ? 0: state.findStudent.persuasiveThree ) +
+  (studentId === null ? 0: state.findStudent.persuasiveTwo ) +
+  (studentId === null ? 0: state.findStudent.persuasiveOne );
 
   const persuasionRatingAverage =
-    (5 * state.findStudent.persuasionFive +
-      4 * state.findStudent.persuasionFour +
-      3 * state.findStudent.persuasionThree +
-      2 * state.findStudent.persuasionTwo +
-      1 * state.findStudent.persuasionOne) /
+  (studentId === null ? 0 : 5 * state.findStudent.persuasiveFive ) +
+  (studentId === null ? 0 : 4 * state.findStudent.persuasiveFour ) +
+  (studentId === null ? 0 : 3 * state.findStudent.persuasiveThree ) +
+  (studentId === null ? 0 : 2 * state.findStudent.persuasiveTwo ) +
+  (studentId === null ? 0 : 1 * state.findStudent.persuasiveOne ) /
     totalPersuasionRating;
 
   const totalOverallRating =
@@ -326,7 +327,7 @@ export default function StudentEvaluation() {
                   <ButtonBase sx={{ width: 80, height: 80 }}>
                     <Img
                       alt="complex"
-                      src={state.findStudent.image}
+                      src={(studentId === null ? "" : state.findStudent.image )}
                       sx={{ borderRadius: 1, border: "1px solid #D1D4C9" }}
                     />
                   </ButtonBase>
@@ -351,7 +352,7 @@ export default function StudentEvaluation() {
                       Overall Rating
                     </Typography>
                     <Typography sx={style.leftProfileTypography}>
-                      {state.findStudent.studentReview}
+                      {(studentId === null ? "" : state.findStudent.studentReview )}
                     </Typography>
                     <Typography sx={style.leftProfileTypography}>
                       Reviews
@@ -369,7 +370,7 @@ export default function StudentEvaluation() {
                     }}
                   >
                     <Typography sx={style.studenttitlename}>
-                      {state.findStudent.studentName}
+                      {(studentId === null ? "" : state.findStudent.studentName )}
                     </Typography>
                     <Typography
                       variant="inherit"
@@ -456,7 +457,7 @@ export default function StudentEvaluation() {
                           color: "#D1D4C9",
                         }}
                       >
-                        {state.findStudent.studentGender}
+                        {(studentId === null ? "" : state.findStudent.studentGender )}
                       </Typography>
                       <Typography
                         gutterBottom
@@ -466,7 +467,7 @@ export default function StudentEvaluation() {
                           color: "#D1D4C9",
                         }}
                       >
-                        {state.findStudent.studentBirthdate}
+                        {(studentId === null ? "" : state.findStudent.studentBirthdate)}
                       </Typography>
                       <Typography
                         gutterBottom
@@ -476,7 +477,7 @@ export default function StudentEvaluation() {
                           color: "#D1D4C9",
                         }}
                       >
-                        {state.findStudent.studentAddress}
+                        {(studentId === null ? "" : state.findStudent.studentAddress)}
                       </Typography>
                       <Typography
                         gutterBottom
@@ -486,7 +487,7 @@ export default function StudentEvaluation() {
                           color: "#D1D4C9",
                         }}
                       >
-                        {state.findStudent.studentNickname}
+                        {(studentId === null ? "" : state.findStudent.studentNickname)}
                       </Typography>
                       <Typography
                         gutterBottom
@@ -496,7 +497,7 @@ export default function StudentEvaluation() {
                           color: "#D1D4C9",
                         }}
                       >
-                        {state.findStudent.studentSkills}
+                        {(studentId === null ? "" :state.findStudent.studentSkills)}
                       </Typography>
                     </Grid>
                   </Grid>
