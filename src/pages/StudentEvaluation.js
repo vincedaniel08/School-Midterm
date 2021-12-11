@@ -117,7 +117,7 @@ export default function StudentEvaluation() {
         }
         if (state.comments.find((item) => item.commentEmail === user.email)) {
           toast.warn(
-            "Hi! " + user.displayName +  + ",You've already commented"
+            "Hi! " + user.displayName +   ",You can only rate once"
           );
           setOverAll(null);
           setOpen(false);
@@ -255,18 +255,18 @@ export default function StudentEvaluation() {
 
   //persuasion
   const totalPersuasionRating =
-  (studentId === null ? 0 : state.findStudent.persuasiveFive ) +
-  (studentId === null ? 0: state.findStudent.persuasiveFour ) +
-  (studentId === null ? 0: state.findStudent.persuasiveThree ) +
-  (studentId === null ? 0: state.findStudent.persuasiveTwo ) +
-  (studentId === null ? 0: state.findStudent.persuasiveOne );
+  (studentId === null ? 0 : state.findStudent.persuasionFive ) +
+  (studentId === null ? 0: state.findStudent.persuasionFour ) +
+  (studentId === null ? 0: state.findStudent.persuasionThree ) +
+  (studentId === null ? 0: state.findStudent.persuasionTwo ) +
+  (studentId === null ? 0: state.findStudent.persuasionOne );
 
   const persuasionRatingAverage =
-  (studentId === null ? 0 : 5 * state.findStudent.persuasiveFive ) +
-  (studentId === null ? 0 : 4 * state.findStudent.persuasiveFour ) +
-  (studentId === null ? 0 : 3 * state.findStudent.persuasiveThree ) +
-  (studentId === null ? 0 : 2 * state.findStudent.persuasiveTwo ) +
-  (studentId === null ? 0 : 1 * state.findStudent.persuasiveOne ) /
+  (studentId === null ? 0 : 5 * state.findStudent.persuasionFive ) +
+  (studentId === null ? 0 : 4 * state.findStudent.persuasionFour ) +
+  (studentId === null ? 0 : 3 * state.findStudent.persuasionThree ) +
+  (studentId === null ? 0 : 2 * state.findStudent.persuasionTwo ) +
+  (studentId === null ? 0 : 1 * state.findStudent.persuasionOne ) /
     totalPersuasionRating;
 
   const totalOverallRating =
